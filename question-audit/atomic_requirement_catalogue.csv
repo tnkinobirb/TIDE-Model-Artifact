@@ -1,0 +1,98 @@
+Requirement_ID,Requirement_Type,Canonical_Atomic_Requirement,Occurrence_Count,Question_Appearance_Count,Question_IDs
+Identity-01,Identity,Exact recorded data items must be distinguishable.,16,16,SCQ1;SCQ2;SCQ3;SCQ5;SCQ6;SCQ8;SCQ9;TCQ1;TCQ3;MGQ1;MGQ2;MGQ3;MGQ4;MGQ5;MGQ6;MTQ1
+Identity-02,Identity,Exact recorded process occurrences must be distinguishable.,17,17,SCQ1;SCQ2;SCQ3;SCQ4;SCQ5;SCQ6;SCQ8;TCQ1;TCQ2;TCQ3;MGQ1;MGQ2;MGQ3;MGQ4;MGQ5;MGQ6;MTQ1
+Identity-03,Identity,Exact recorded data items must be distinguishable within each run.,1,1,SCQ7
+Identity-04,Identity,Exact recorded process occurrences must be distinguishable within each run.,1,1,SCQ7
+Identity-05,Identity,Corresponding parts of the two runs must be identifiable.,1,1,SCQ7
+Identity-06,Identity,Exact recorded rows must be distinguishable.,1,1,TCQ1
+Identity-07,Identity,Exact recorded files must be distinguishable.,1,1,TCQ1
+Identity-08,Identity,Exact recorded table data must be distinguishable.,1,1,TCQ2
+Identity-09,Identity,Exact recorded values must be distinguishable.,1,1,TCQ3
+Identity-10,Identity,Exact plot data must be distinguishable.,1,1,TCQ5
+Identity-11,Identity,Exact rows must be distinguishable.,1,1,TCQ5
+Identity-12,Identity,Exact tables must be distinguishable.,1,1,TCQ5
+Identity-13,Identity,Exact CSV files must be distinguishable.,1,1,TCQ5
+Identity-14,Identity,Exact process occurrences must be distinguishable.,8,8,TCQ5;TOQ1;TOQ2;TOQ4;TOQ7;TOQ11;TOQ12;TOQ13
+Identity-15,Identity,Exact table data items must be distinguishable.,1,1,TOQ1
+Identity-16,Identity,Exact relevant data items must be distinguishable.,1,1,TOQ2
+Identity-17,Identity,Exact data items must be distinguishable.,3,3,TOQ4;TOQ7;TOQ13
+Identity-18,Identity,Exact workflow executions must be distinguishable.,1,1,TOQ5
+Identity-19,Identity,Repeated process occurrences must be distinguishable.,2,2,TOQ6;TOQ8
+Identity-20,Identity,Planned process occurrences must be distinguishable.,1,1,TOQ9
+Identity-21,Identity,Exact input data items must be distinguishable.,1,1,TOQ10
+Identity-22,Identity,Exact input data must be distinguishable.,1,1,TOQ11
+Identity-23,Identity,Exact files must be distinguishable.,1,1,TOQ12
+ProducerConsumer-01,Producer-Consumer relationship,"It must be known which process produced each data item, where a producer is represented in the selected history.",14,14,SCQ1;SCQ2;SCQ3;SCQ6;SCQ7;TOQ4;TOQ13;MGQ1;MGQ2;MGQ3;MGQ4;MGQ5;MGQ6;MTQ1
+ProducerConsumer-02,Producer-Consumer relationship,"It must be known which process consumed each data item, where a consumer is represented in the selected history.",9,9,SCQ1;SCQ2;SCQ3;SCQ6;SCQ7;TOQ4;TOQ13;MGQ1;MTQ1
+ProducerConsumer-03,Producer-Consumer relationship,"It must be known which process consumed each header, where a consumer is represented in the selected history.",1,1,SCQ5
+ProducerConsumer-04,Producer-Consumer relationship,"It must be known which process produced each later data item, where a producer is represented in the selected history.",1,1,SCQ5
+ProducerConsumer-05,Producer-Consumer relationship,"It must be known which process consumed each input, where a consumer is represented in the selected history.",2,2,SCQ8;TOQ11
+ProducerConsumer-06,Producer-Consumer relationship,It must be known which data items each process produced.,1,1,SCQ8
+ProducerConsumer-07,Producer-Consumer relationship,"It must be known which processes produced each relevant data item, where a producer is represented in the selected history.",1,1,TCQ1
+ProducerConsumer-08,Producer-Consumer relationship,It must be known which processes used each relevant data item.,1,1,TCQ1
+ProducerConsumer-09,Producer-Consumer relationship,It must be known which data the range-check occurrence used.,1,1,TCQ2
+ProducerConsumer-10,Producer-Consumer relationship,"It must be known which process consumed each relevant data item, where a consumer is represented in the selected history.",1,1,TCQ3
+ProducerConsumer-11,Producer-Consumer relationship,"It must be known which process produced each relevant data item, where a producer is represented in the selected history.",1,1,TCQ3
+ProducerConsumer-12,Producer-Consumer relationship,It must be known which processes produced or used each relevant data item.,1,1,TCQ5
+ProducerConsumer-13,Producer-Consumer relationship,It must be known which load occurrence processed each table.,1,1,TOQ1
+ProducerConsumer-14,Producer-Consumer relationship,"It must be known which process occurrence produced each relevant data item, where a producer is represented in the selected history.",1,1,TOQ2
+ProducerConsumer-15,Producer-Consumer relationship,"It must be known which process occurrence consumed each relevant data item, where a consumer is represented in the selected history.",1,1,TOQ2
+ProducerConsumer-16,Producer-Consumer relationship,It must be known which data was incident to the halted process.,1,1,TOQ7
+ProducerConsumer-17,Producer-Consumer relationship,It must be known which processes handled each file.,1,1,TOQ12
+ExecutionStatus-01,Execution Status,The execution status of the range-check occurrence must be known.,1,1,TCQ2
+ExecutionStatus-02,Execution Status,Execution status must be known.,5,5,TOQ1;TOQ5;TOQ6;TOQ8;MGQ6
+ExecutionStatus-03,Execution Status,Their execution statuses must be known.,1,1,TOQ3
+ExecutionStatus-04,Execution Status,The realised execution status of planned occurrences must be known.,1,1,TOQ9
+ExecutionStatus-05,Execution Status,Status must be known.,1,1,TOQ12
+OrderingTime-01,Ordering/Time,The execution time of each occurrence must be known.,1,1,SCQ4
+OrderingTime-02,Ordering/Time,Execution ordering must be known.,1,1,TOQ1
+OrderingTime-03,Ordering/Time,Their execution times must be known.,1,1,TOQ3
+OrderingTime-04,Ordering/Time,Execution order must be known.,2,2,TOQ8;TOQ12
+OrderingTime-05,Ordering/Time,Execution time must be known.,1,1,MGQ6
+DomainSemantics-01,Domain Semantics,The database foreign-key relationships needed for the advanced answer must be known.,1,1,TCQ1
+DomainSemantics-02,Domain Semantics,Operation effects on the selected value must be known.,1,1,TCQ3
+DomainSemantics-03,Domain Semantics,The plot-to-row relationships must be known.,1,1,TCQ5
+DomainSemantics-04,Domain Semantics,The row-to-table relationships must be known.,1,1,TCQ5
+DomainSemantics-05,Domain Semantics,Process effects must be known.,1,1,TOQ2
+DomainSemantics-06,Domain Semantics,Value equivalence must be known.,1,1,TOQ2
+DomainSemantics-07,Domain Semantics,Control-flow constraints must be known.,1,1,TOQ2
+DomainSemantics-08,Domain Semantics,Loop constraints must be known.,1,1,TOQ2
+DomainSemantics-09,Domain Semantics,Exact test occurrences must be distinguishable.,1,1,TOQ3
+DomainSemantics-10,Domain Semantics,Values must be known.,1,1,TOQ4
+DomainSemantics-11,Domain Semantics,Operation meaning must be known.,1,1,TOQ4
+DomainSemantics-12,Domain Semantics,Causal explanation must be known.,1,1,TOQ4
+DomainSemantics-13,Domain Semantics,Domain explanation must be known.,1,1,TOQ4
+DomainSemantics-14,Domain Semantics,The prospective workflow/control model must be known.,1,1,TOQ9
+DomainSemantics-15,Domain Semantics,Exact rows must be distinguishable.,1,1,TOQ14
+DomainSemantics-16,Domain Semantics,The database values must be known.,1,1,TOQ14
+DomainSemantics-17,Domain Semantics,The foreign-key relationships must be known.,1,1,TOQ14
+DomainSemantics-18,Domain Semantics,The plot query must be known.,1,1,TOQ14
+DomainSemantics-19,Domain Semantics,The domain mapping must be known.,1,1,TOQ14
+DomainSemantics-20,Domain Semantics,Exact database rows must be distinguishable.,1,1,TOQ15
+DomainSemantics-21,Domain Semantics,Their values must be known.,1,1,TOQ15
+DomainSemantics-22,Domain Semantics,Both query definitions must be known.,1,1,TOQ15
+DomainSemantics-23,Domain Semantics,Set-difference semantics must be known.,1,1,TOQ15
+AnnotationsFiltering-01,Annotations and Filtering,The process name must be known.,6,6,SCQ2;SCQ6;SCQ8;TCQ2;TOQ6;TOQ8
+AnnotationsFiltering-02,Annotations and Filtering,The process name of each identified occurrence must be known.,1,1,SCQ3
+AnnotationsFiltering-03,Annotations and Filtering,The stage of each identified process must be known.,1,1,SCQ3
+AnnotationsFiltering-04,Annotations and Filtering,The parameter details of each identified process must be known.,1,1,SCQ3
+AnnotationsFiltering-05,Annotations and Filtering,The process name of each occurrence must be known.,1,1,SCQ4
+AnnotationsFiltering-06,Annotations and Filtering,The parameters of each occurrence must be known.,1,1,SCQ4
+AnnotationsFiltering-07,Annotations and Filtering,Header values must be known.,1,1,SCQ5
+AnnotationsFiltering-08,Annotations and Filtering,Data item types must be known.,6,6,SCQ5;SCQ6;SCQ8;SCQ9;MGQ1;MTQ1
+AnnotationsFiltering-09,Annotations and Filtering,Parameter values must be known.,1,1,SCQ6
+AnnotationsFiltering-10,Annotations and Filtering,The compared process details must be known.,1,1,SCQ7
+AnnotationsFiltering-11,Annotations and Filtering,The compared data details must be known.,1,1,SCQ7
+AnnotationsFiltering-12,Annotations and Filtering,The compared attribute details must be known.,1,1,SCQ7
+AnnotationsFiltering-13,Annotations and Filtering,Data annotations must be known.,1,1,SCQ8
+AnnotationsFiltering-14,Annotations and Filtering,Their annotation keys must be known.,1,1,SCQ9
+AnnotationsFiltering-15,Annotations and Filtering,Their annotation values must be known.,1,1,SCQ9
+AnnotationsFiltering-16,Annotations and Filtering,Input-data-set association must be known.,1,1,TOQ5
+AnnotationsFiltering-17,Annotations and Filtering,Occurrence count must be known.,1,1,TOQ6
+AnnotationsFiltering-18,Annotations and Filtering,Data granularity information must be known.,1,1,TOQ7
+AnnotationsFiltering-19,Annotations and Filtering,Their association with the workflow execution must be known.,1,1,TOQ10
+AnnotationsFiltering-20,Annotations and Filtering,User-input role information must be known.,2,2,TOQ10;TOQ11
+AnnotationsFiltering-21,Annotations and Filtering,Parameter names and values must be known.,1,1,MGQ2
+AnnotationsFiltering-22,Annotations and Filtering,The pipeline-run associated with each occurrence must be known.,1,1,MGQ3
+AnnotationsFiltering-23,Annotations and Filtering,Software/environment version metadata must be known.,1,1,MGQ5
+AnnotationsFiltering-24,Annotations and Filtering,File names must be known.,3,3,TCQ1;TCQ5;TOQ12

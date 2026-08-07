@@ -1,0 +1,19 @@
+{
+  "execution_map": {
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:capture_sources": "openlineage:run:10000000-0000-4000-8000-000000000001",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:prepare_left": "openlineage:run:10000000-0000-4000-8000-000000000002",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:prepare_right": "openlineage:run:10000000-0000-4000-8000-000000000003",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:merge": "openlineage:run:10000000-0000-4000-8000-000000000004",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:analyse": "openlineage:run:10000000-0000-4000-8000-000000000005",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:archive": "openlineage:run:10000000-0000-4000-8000-000000000006"
+  },
+  "state_map": {
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:capture_sources:output:source_left": "openlineage:dataset:tide-retained-history/source_left",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:capture_sources:output:source_right": "openlineage:dataset:tide-retained-history/source_right",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:prepare_left:output:result": "openlineage:dataset:tide-retained-history/ready_left",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:prepare_right:output:result": "openlineage:dataset:tide-retained-history/ready_right",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:merge:output:result": "openlineage:dataset:tide-retained-history/merged",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:analyse:output:result": "openlineage:dataset:tide-retained-history/analysis",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:archive:output:result": "openlineage:dataset:tide-retained-history/archive_record"
+  }
+}

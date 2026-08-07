@@ -1,0 +1,20 @@
+{
+  "execution_map": {
+    "or0": "mx0",
+    "or1": "mx1",
+    "or2": "mx2",
+    "or3": "mx3",
+    "or4": "mx4",
+    "or5": "mx5"
+  },
+  "state_map": {
+    "od0": "ma0",
+    "od1": "ma1",
+    "od2": "ma2",
+    "od3": "ma3",
+    "od4": "ma4",
+    "od5": "ma5",
+    "od6": "ma6",
+    "unknown_source_state": "ma7"
+  }
+}

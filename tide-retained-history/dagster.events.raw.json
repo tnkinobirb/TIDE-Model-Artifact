@@ -1,0 +1,1685 @@
+{
+  "dagster_version": "1.13.16",
+  "events": [
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": null,
+      "event_type_value": "PIPELINE_START",
+      "logging_tags": {},
+      "message": "Started execution of run for \"workflow\".",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": null,
+      "step_handle": null,
+      "step_key": null,
+      "step_kind_value": null
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "EngineEventData",
+        "error": null,
+        "marker_end": null,
+        "marker_start": null,
+        "metadata_entries": [
+          {
+            "__class__": "EventMetadataEntry",
+            "description": null,
+            "entry_data": {
+              "__class__": "TextMetadataEntryData",
+              "text": "14448"
+            },
+            "label": "pid"
+          },
+          {
+            "__class__": "EventMetadataEntry",
+            "description": null,
+            "entry_data": {
+              "__class__": "TextMetadataEntryData",
+              "text": "['capture_sources', 'prepare_left', 'prepare_right', 'merge', 'analyse', 'archive']"
+            },
+            "label": "step_keys"
+          }
+        ]
+      },
+      "event_type_value": "ENGINE_EVENT",
+      "logging_tags": {},
+      "message": "Executing steps in process (pid: 14448)",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": null,
+      "step_handle": null,
+      "step_key": null,
+      "step_kind_value": null
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "EngineEventData",
+        "error": null,
+        "marker_end": null,
+        "marker_start": "resources",
+        "metadata_entries": []
+      },
+      "event_type_value": "RESOURCE_INIT_STARTED",
+      "logging_tags": {},
+      "message": "Starting initialization of resources [io_manager].",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": null,
+      "step_handle": null,
+      "step_key": null,
+      "step_kind_value": null
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "EngineEventData",
+        "error": null,
+        "marker_end": "resources",
+        "marker_start": null,
+        "metadata_entries": [
+          {
+            "__class__": "EventMetadataEntry",
+            "description": null,
+            "entry_data": {
+              "__class__": "PythonArtifactMetadataEntryData",
+              "module": "dagster._core.storage.mem_io_manager",
+              "name": "InMemoryIOManager"
+            },
+            "label": "io_manager"
+          },
+          {
+            "__class__": "EventMetadataEntry",
+            "description": null,
+            "entry_data": {
+              "__class__": "TextMetadataEntryData",
+              "text": "0.04ms"
+            },
+            "label": "io_manager:init_time"
+          }
+        ]
+      },
+      "event_type_value": "RESOURCE_INIT_SUCCESS",
+      "logging_tags": {},
+      "message": "Finished initialization of resources [io_manager].",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": null,
+      "step_handle": null,
+      "step_key": null,
+      "step_kind_value": null
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "ComputeLogsCaptureData",
+        "external_stderr_url": null,
+        "external_stdout_url": null,
+        "external_url": null,
+        "log_key": "ixeefhye",
+        "shell_cmd": null,
+        "step_keys": [
+          "capture_sources",
+          "prepare_left",
+          "prepare_right",
+          "merge",
+          "analyse",
+          "archive"
+        ]
+      },
+      "event_type_value": "LOGS_CAPTURED",
+      "logging_tags": {},
+      "message": "Capturing logs for process (pid: 14448).",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": null,
+      "step_handle": null,
+      "step_key": null,
+      "step_kind_value": null
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": null,
+      "event_type_value": "STEP_START",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "capture_sources",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "capture_sources"
+      },
+      "message": "Started execution of step \"capture_sources\".",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "capture_sources",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "capture_sources",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "capture_sources",
+          "parent": null
+        }
+      },
+      "step_key": "capture_sources",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepOutputData",
+        "metadata_entries": [],
+        "step_output_handle": {
+          "__class__": "StepOutputHandle",
+          "mapping_key": null,
+          "output_name": "source_left",
+          "step_key": "capture_sources"
+        },
+        "type_check_data": {
+          "__class__": "TypeCheckData",
+          "description": null,
+          "label": "source_left",
+          "metadata_entries": [],
+          "success": true
+        },
+        "version": null
+      },
+      "event_type_value": "STEP_OUTPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "capture_sources",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "capture_sources"
+      },
+      "message": "Yielded output \"source_left\" of type \"Any\". (Type check passed).",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "capture_sources",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "capture_sources",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "capture_sources",
+          "parent": null
+        }
+      },
+      "step_key": "capture_sources",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "HandledOutputData",
+        "manager_key": "io_manager",
+        "metadata_entries": [],
+        "output_name": "source_left"
+      },
+      "event_type_value": "HANDLED_OUTPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "capture_sources",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "capture_sources"
+      },
+      "message": "Handled output \"source_left\" using IO manager \"io_manager\"",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "capture_sources",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "capture_sources",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "capture_sources",
+          "parent": null
+        }
+      },
+      "step_key": "capture_sources",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepOutputData",
+        "metadata_entries": [],
+        "step_output_handle": {
+          "__class__": "StepOutputHandle",
+          "mapping_key": null,
+          "output_name": "source_right",
+          "step_key": "capture_sources"
+        },
+        "type_check_data": {
+          "__class__": "TypeCheckData",
+          "description": null,
+          "label": "source_right",
+          "metadata_entries": [],
+          "success": true
+        },
+        "version": null
+      },
+      "event_type_value": "STEP_OUTPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "capture_sources",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "capture_sources"
+      },
+      "message": "Yielded output \"source_right\" of type \"Any\". (Type check passed).",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "capture_sources",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "capture_sources",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "capture_sources",
+          "parent": null
+        }
+      },
+      "step_key": "capture_sources",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "HandledOutputData",
+        "manager_key": "io_manager",
+        "metadata_entries": [],
+        "output_name": "source_right"
+      },
+      "event_type_value": "HANDLED_OUTPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "capture_sources",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "capture_sources"
+      },
+      "message": "Handled output \"source_right\" using IO manager \"io_manager\"",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "capture_sources",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "capture_sources",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "capture_sources",
+          "parent": null
+        }
+      },
+      "step_key": "capture_sources",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepSuccessData",
+        "duration_ms": 5.8841999998549
+      },
+      "event_type_value": "STEP_SUCCESS",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "capture_sources",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "capture_sources"
+      },
+      "message": "Finished execution of step \"capture_sources\" in 5.88ms.",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "capture_sources",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "capture_sources",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "capture_sources",
+          "parent": null
+        }
+      },
+      "step_key": "capture_sources",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": null,
+      "event_type_value": "STEP_START",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "prepare_left",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "prepare_left"
+      },
+      "message": "Started execution of step \"prepare_left\".",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "prepare_left",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "prepare_left",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "prepare_left",
+          "parent": null
+        }
+      },
+      "step_key": "prepare_left",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "LoadedInputData",
+        "input_name": "source_left",
+        "manager_key": "io_manager",
+        "metadata_entries": [],
+        "upstream_output_name": "source_left",
+        "upstream_step_key": "capture_sources"
+      },
+      "event_type_value": "LOADED_INPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "prepare_left",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "prepare_left"
+      },
+      "message": "Loaded input \"source_left\" using input manager \"io_manager\", from output \"source_left\" of step \"capture_sources\"",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "prepare_left",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "prepare_left",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "prepare_left",
+          "parent": null
+        }
+      },
+      "step_key": "prepare_left",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepInputData",
+        "input_name": "source_left",
+        "type_check_data": {
+          "__class__": "TypeCheckData",
+          "description": null,
+          "label": "source_left",
+          "metadata_entries": [],
+          "success": true
+        }
+      },
+      "event_type_value": "STEP_INPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "prepare_left",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "prepare_left"
+      },
+      "message": "Got input \"source_left\" of type \"Any\". (Type check passed).",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "prepare_left",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "prepare_left",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "prepare_left",
+          "parent": null
+        }
+      },
+      "step_key": "prepare_left",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepOutputData",
+        "metadata_entries": [],
+        "step_output_handle": {
+          "__class__": "StepOutputHandle",
+          "mapping_key": null,
+          "output_name": "result",
+          "step_key": "prepare_left"
+        },
+        "type_check_data": {
+          "__class__": "TypeCheckData",
+          "description": null,
+          "label": "result",
+          "metadata_entries": [],
+          "success": true
+        },
+        "version": null
+      },
+      "event_type_value": "STEP_OUTPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "prepare_left",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "prepare_left"
+      },
+      "message": "Yielded output \"result\" of type \"Any\". (Type check passed).",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "prepare_left",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "prepare_left",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "prepare_left",
+          "parent": null
+        }
+      },
+      "step_key": "prepare_left",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "HandledOutputData",
+        "manager_key": "io_manager",
+        "metadata_entries": [],
+        "output_name": "result"
+      },
+      "event_type_value": "HANDLED_OUTPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "prepare_left",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "prepare_left"
+      },
+      "message": "Handled output \"result\" using IO manager \"io_manager\"",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "prepare_left",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "prepare_left",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "prepare_left",
+          "parent": null
+        }
+      },
+      "step_key": "prepare_left",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepSuccessData",
+        "duration_ms": 5.343700002413243
+      },
+      "event_type_value": "STEP_SUCCESS",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "prepare_left",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "prepare_left"
+      },
+      "message": "Finished execution of step \"prepare_left\" in 5.34ms.",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "prepare_left",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "prepare_left",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "prepare_left",
+          "parent": null
+        }
+      },
+      "step_key": "prepare_left",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": null,
+      "event_type_value": "STEP_START",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "prepare_right",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "prepare_right"
+      },
+      "message": "Started execution of step \"prepare_right\".",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "prepare_right",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "prepare_right",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "prepare_right",
+          "parent": null
+        }
+      },
+      "step_key": "prepare_right",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "LoadedInputData",
+        "input_name": "source_right",
+        "manager_key": "io_manager",
+        "metadata_entries": [],
+        "upstream_output_name": "source_right",
+        "upstream_step_key": "capture_sources"
+      },
+      "event_type_value": "LOADED_INPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "prepare_right",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "prepare_right"
+      },
+      "message": "Loaded input \"source_right\" using input manager \"io_manager\", from output \"source_right\" of step \"capture_sources\"",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "prepare_right",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "prepare_right",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "prepare_right",
+          "parent": null
+        }
+      },
+      "step_key": "prepare_right",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepInputData",
+        "input_name": "source_right",
+        "type_check_data": {
+          "__class__": "TypeCheckData",
+          "description": null,
+          "label": "source_right",
+          "metadata_entries": [],
+          "success": true
+        }
+      },
+      "event_type_value": "STEP_INPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "prepare_right",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "prepare_right"
+      },
+      "message": "Got input \"source_right\" of type \"Any\". (Type check passed).",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "prepare_right",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "prepare_right",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "prepare_right",
+          "parent": null
+        }
+      },
+      "step_key": "prepare_right",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepOutputData",
+        "metadata_entries": [],
+        "step_output_handle": {
+          "__class__": "StepOutputHandle",
+          "mapping_key": null,
+          "output_name": "result",
+          "step_key": "prepare_right"
+        },
+        "type_check_data": {
+          "__class__": "TypeCheckData",
+          "description": null,
+          "label": "result",
+          "metadata_entries": [],
+          "success": true
+        },
+        "version": null
+      },
+      "event_type_value": "STEP_OUTPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "prepare_right",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "prepare_right"
+      },
+      "message": "Yielded output \"result\" of type \"Any\". (Type check passed).",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "prepare_right",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "prepare_right",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "prepare_right",
+          "parent": null
+        }
+      },
+      "step_key": "prepare_right",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "HandledOutputData",
+        "manager_key": "io_manager",
+        "metadata_entries": [],
+        "output_name": "result"
+      },
+      "event_type_value": "HANDLED_OUTPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "prepare_right",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "prepare_right"
+      },
+      "message": "Handled output \"result\" using IO manager \"io_manager\"",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "prepare_right",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "prepare_right",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "prepare_right",
+          "parent": null
+        }
+      },
+      "step_key": "prepare_right",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepSuccessData",
+        "duration_ms": 4.821000009542331
+      },
+      "event_type_value": "STEP_SUCCESS",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "prepare_right",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "prepare_right"
+      },
+      "message": "Finished execution of step \"prepare_right\" in 4.82ms.",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "prepare_right",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "prepare_right",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "prepare_right",
+          "parent": null
+        }
+      },
+      "step_key": "prepare_right",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": null,
+      "event_type_value": "STEP_START",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "merge",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "merge"
+      },
+      "message": "Started execution of step \"merge\".",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "merge",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "merge",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "merge",
+          "parent": null
+        }
+      },
+      "step_key": "merge",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "LoadedInputData",
+        "input_name": "ready_left",
+        "manager_key": "io_manager",
+        "metadata_entries": [],
+        "upstream_output_name": "result",
+        "upstream_step_key": "prepare_left"
+      },
+      "event_type_value": "LOADED_INPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "merge",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "merge"
+      },
+      "message": "Loaded input \"ready_left\" using input manager \"io_manager\", from output \"result\" of step \"prepare_left\"",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "merge",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "merge",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "merge",
+          "parent": null
+        }
+      },
+      "step_key": "merge",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "LoadedInputData",
+        "input_name": "ready_right",
+        "manager_key": "io_manager",
+        "metadata_entries": [],
+        "upstream_output_name": "result",
+        "upstream_step_key": "prepare_right"
+      },
+      "event_type_value": "LOADED_INPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "merge",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "merge"
+      },
+      "message": "Loaded input \"ready_right\" using input manager \"io_manager\", from output \"result\" of step \"prepare_right\"",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "merge",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "merge",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "merge",
+          "parent": null
+        }
+      },
+      "step_key": "merge",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepInputData",
+        "input_name": "ready_left",
+        "type_check_data": {
+          "__class__": "TypeCheckData",
+          "description": null,
+          "label": "ready_left",
+          "metadata_entries": [],
+          "success": true
+        }
+      },
+      "event_type_value": "STEP_INPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "merge",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "merge"
+      },
+      "message": "Got input \"ready_left\" of type \"Any\". (Type check passed).",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "merge",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "merge",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "merge",
+          "parent": null
+        }
+      },
+      "step_key": "merge",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepInputData",
+        "input_name": "ready_right",
+        "type_check_data": {
+          "__class__": "TypeCheckData",
+          "description": null,
+          "label": "ready_right",
+          "metadata_entries": [],
+          "success": true
+        }
+      },
+      "event_type_value": "STEP_INPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "merge",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "merge"
+      },
+      "message": "Got input \"ready_right\" of type \"Any\". (Type check passed).",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "merge",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "merge",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "merge",
+          "parent": null
+        }
+      },
+      "step_key": "merge",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepOutputData",
+        "metadata_entries": [],
+        "step_output_handle": {
+          "__class__": "StepOutputHandle",
+          "mapping_key": null,
+          "output_name": "result",
+          "step_key": "merge"
+        },
+        "type_check_data": {
+          "__class__": "TypeCheckData",
+          "description": null,
+          "label": "result",
+          "metadata_entries": [],
+          "success": true
+        },
+        "version": null
+      },
+      "event_type_value": "STEP_OUTPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "merge",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "merge"
+      },
+      "message": "Yielded output \"result\" of type \"Any\". (Type check passed).",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "merge",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "merge",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "merge",
+          "parent": null
+        }
+      },
+      "step_key": "merge",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "HandledOutputData",
+        "manager_key": "io_manager",
+        "metadata_entries": [],
+        "output_name": "result"
+      },
+      "event_type_value": "HANDLED_OUTPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "merge",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "merge"
+      },
+      "message": "Handled output \"result\" using IO manager \"io_manager\"",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "merge",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "merge",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "merge",
+          "parent": null
+        }
+      },
+      "step_key": "merge",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepSuccessData",
+        "duration_ms": 6.952399999136105
+      },
+      "event_type_value": "STEP_SUCCESS",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "merge",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "merge"
+      },
+      "message": "Finished execution of step \"merge\" in 6.95ms.",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "merge",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "merge",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "merge",
+          "parent": null
+        }
+      },
+      "step_key": "merge",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": null,
+      "event_type_value": "STEP_START",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "analyse",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "analyse"
+      },
+      "message": "Started execution of step \"analyse\".",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "analyse",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "analyse",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "analyse",
+          "parent": null
+        }
+      },
+      "step_key": "analyse",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "LoadedInputData",
+        "input_name": "merged",
+        "manager_key": "io_manager",
+        "metadata_entries": [],
+        "upstream_output_name": "result",
+        "upstream_step_key": "merge"
+      },
+      "event_type_value": "LOADED_INPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "analyse",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "analyse"
+      },
+      "message": "Loaded input \"merged\" using input manager \"io_manager\", from output \"result\" of step \"merge\"",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "analyse",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "analyse",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "analyse",
+          "parent": null
+        }
+      },
+      "step_key": "analyse",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepInputData",
+        "input_name": "merged",
+        "type_check_data": {
+          "__class__": "TypeCheckData",
+          "description": null,
+          "label": "merged",
+          "metadata_entries": [],
+          "success": true
+        }
+      },
+      "event_type_value": "STEP_INPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "analyse",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "analyse"
+      },
+      "message": "Got input \"merged\" of type \"Any\". (Type check passed).",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "analyse",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "analyse",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "analyse",
+          "parent": null
+        }
+      },
+      "step_key": "analyse",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepOutputData",
+        "metadata_entries": [],
+        "step_output_handle": {
+          "__class__": "StepOutputHandle",
+          "mapping_key": null,
+          "output_name": "result",
+          "step_key": "analyse"
+        },
+        "type_check_data": {
+          "__class__": "TypeCheckData",
+          "description": null,
+          "label": "result",
+          "metadata_entries": [],
+          "success": true
+        },
+        "version": null
+      },
+      "event_type_value": "STEP_OUTPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "analyse",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "analyse"
+      },
+      "message": "Yielded output \"result\" of type \"Any\". (Type check passed).",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "analyse",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "analyse",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "analyse",
+          "parent": null
+        }
+      },
+      "step_key": "analyse",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "HandledOutputData",
+        "manager_key": "io_manager",
+        "metadata_entries": [],
+        "output_name": "result"
+      },
+      "event_type_value": "HANDLED_OUTPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "analyse",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "analyse"
+      },
+      "message": "Handled output \"result\" using IO manager \"io_manager\"",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "analyse",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "analyse",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "analyse",
+          "parent": null
+        }
+      },
+      "step_key": "analyse",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepSuccessData",
+        "duration_ms": 3.896800000802614
+      },
+      "event_type_value": "STEP_SUCCESS",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "analyse",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "analyse"
+      },
+      "message": "Finished execution of step \"analyse\" in 3.9ms.",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "analyse",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "analyse",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "analyse",
+          "parent": null
+        }
+      },
+      "step_key": "analyse",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": null,
+      "event_type_value": "STEP_START",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "archive",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "archive"
+      },
+      "message": "Started execution of step \"archive\".",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "archive",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "archive",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "archive",
+          "parent": null
+        }
+      },
+      "step_key": "archive",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "LoadedInputData",
+        "input_name": "merged",
+        "manager_key": "io_manager",
+        "metadata_entries": [],
+        "upstream_output_name": "result",
+        "upstream_step_key": "merge"
+      },
+      "event_type_value": "LOADED_INPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "archive",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "archive"
+      },
+      "message": "Loaded input \"merged\" using input manager \"io_manager\", from output \"result\" of step \"merge\"",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "archive",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "archive",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "archive",
+          "parent": null
+        }
+      },
+      "step_key": "archive",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepInputData",
+        "input_name": "merged",
+        "type_check_data": {
+          "__class__": "TypeCheckData",
+          "description": null,
+          "label": "merged",
+          "metadata_entries": [],
+          "success": true
+        }
+      },
+      "event_type_value": "STEP_INPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "archive",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "archive"
+      },
+      "message": "Got input \"merged\" of type \"Any\". (Type check passed).",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "archive",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "archive",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "archive",
+          "parent": null
+        }
+      },
+      "step_key": "archive",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepOutputData",
+        "metadata_entries": [],
+        "step_output_handle": {
+          "__class__": "StepOutputHandle",
+          "mapping_key": null,
+          "output_name": "result",
+          "step_key": "archive"
+        },
+        "type_check_data": {
+          "__class__": "TypeCheckData",
+          "description": null,
+          "label": "result",
+          "metadata_entries": [],
+          "success": true
+        },
+        "version": null
+      },
+      "event_type_value": "STEP_OUTPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "archive",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "archive"
+      },
+      "message": "Yielded output \"result\" of type \"Any\". (Type check passed).",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "archive",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "archive",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "archive",
+          "parent": null
+        }
+      },
+      "step_key": "archive",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "HandledOutputData",
+        "manager_key": "io_manager",
+        "metadata_entries": [],
+        "output_name": "result"
+      },
+      "event_type_value": "HANDLED_OUTPUT",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "archive",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "archive"
+      },
+      "message": "Handled output \"result\" using IO manager \"io_manager\"",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "archive",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "archive",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "archive",
+          "parent": null
+        }
+      },
+      "step_key": "archive",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "StepSuccessData",
+        "duration_ms": 5.325299993273802
+      },
+      "event_type_value": "STEP_SUCCESS",
+      "logging_tags": {
+        "job_name": "workflow",
+        "op_name": "archive",
+        "resource_fn_name": "None",
+        "resource_name": "None",
+        "run_id": "00000000-0000-4000-8000-000000000001",
+        "step_key": "archive"
+      },
+      "message": "Finished execution of step \"archive\" in 5.33ms.",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": {
+        "__class__": "SolidHandle",
+        "name": "archive",
+        "parent": null
+      },
+      "step_handle": {
+        "__class__": "StepHandle",
+        "key": "archive",
+        "solid_handle": {
+          "__class__": "SolidHandle",
+          "name": "archive",
+          "parent": null
+        }
+      },
+      "step_key": "archive",
+      "step_kind_value": "COMPUTE"
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": {
+        "__class__": "EngineEventData",
+        "error": null,
+        "marker_end": null,
+        "marker_start": null,
+        "metadata_entries": [
+          {
+            "__class__": "EventMetadataEntry",
+            "description": null,
+            "entry_data": {
+              "__class__": "TextMetadataEntryData",
+              "text": "14448"
+            },
+            "label": "pid"
+          },
+          {
+            "__class__": "EventMetadataEntry",
+            "description": null,
+            "entry_data": {
+              "__class__": "TextMetadataEntryData",
+              "text": "['capture_sources', 'prepare_left', 'prepare_right', 'merge', 'analyse', 'archive']"
+            },
+            "label": "step_keys"
+          }
+        ]
+      },
+      "event_type_value": "ENGINE_EVENT",
+      "logging_tags": {},
+      "message": "Finished steps in process (pid: 14448) in 50ms",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": null,
+      "step_handle": null,
+      "step_key": null,
+      "step_kind_value": null
+    },
+    {
+      "__class__": "DagsterEvent",
+      "event_specific_data": null,
+      "event_type_value": "PIPELINE_SUCCESS",
+      "logging_tags": {},
+      "message": "Finished execution of run for \"workflow\".",
+      "pid": 14448,
+      "pipeline_name": "workflow",
+      "solid_handle": null,
+      "step_handle": null,
+      "step_key": null,
+      "step_kind_value": null
+    }
+  ],
+  "format": "DagsterEvent serialized with dagster._serdes.serialize_value",
+  "run_id": "00000000-0000-4000-8000-000000000001"
+}

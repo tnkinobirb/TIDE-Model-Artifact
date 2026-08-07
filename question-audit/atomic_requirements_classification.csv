@@ -1,0 +1,179 @@
+Corpus,Question,Requirement_Type,Requirement_ID,Question_Specific_Atomic_Requirement,Producer_Consumer_Form_IDs,Producer_Consumer_Normalized_Forms
+SECOND_CHALLENGE,SCQ1,Identity,Identity-01,Exact recorded data items must be distinguishable.,,
+SECOND_CHALLENGE,SCQ1,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+SECOND_CHALLENGE,SCQ1,Producer-Consumer relationship,ProducerConsumer-01,"It must be known which process produced each data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+SECOND_CHALLENGE,SCQ1,Producer-Consumer relationship,ProducerConsumer-02,"It must be known which process consumed each data item, where a consumer is represented in the selected history.",PC2,Which Executions consumed a selected State?
+SECOND_CHALLENGE,SCQ2,Identity,Identity-01,Exact recorded data items must be distinguishable.,,
+SECOND_CHALLENGE,SCQ2,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+SECOND_CHALLENGE,SCQ2,Producer-Consumer relationship,ProducerConsumer-01,"It must be known which process produced each data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+SECOND_CHALLENGE,SCQ2,Producer-Consumer relationship,ProducerConsumer-02,"It must be known which process consumed each data item, where a consumer is represented in the selected history.",PC2,Which Executions consumed a selected State?
+SECOND_CHALLENGE,SCQ2,Annotations and Filtering,AnnotationsFiltering-01,The process name must be known.,,
+SECOND_CHALLENGE,SCQ3,Identity,Identity-01,Exact recorded data items must be distinguishable.,,
+SECOND_CHALLENGE,SCQ3,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+SECOND_CHALLENGE,SCQ3,Producer-Consumer relationship,ProducerConsumer-01,"It must be known which process produced each data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+SECOND_CHALLENGE,SCQ3,Producer-Consumer relationship,ProducerConsumer-02,"It must be known which process consumed each data item, where a consumer is represented in the selected history.",PC2,Which Executions consumed a selected State?
+SECOND_CHALLENGE,SCQ3,Annotations and Filtering,AnnotationsFiltering-02,The process name of each identified occurrence must be known.,,
+SECOND_CHALLENGE,SCQ3,Annotations and Filtering,AnnotationsFiltering-03,The stage of each identified process must be known.,,
+SECOND_CHALLENGE,SCQ3,Annotations and Filtering,AnnotationsFiltering-04,The parameter details of each identified process must be known.,,
+SECOND_CHALLENGE,SCQ4,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+SECOND_CHALLENGE,SCQ4,Annotations and Filtering,AnnotationsFiltering-05,The process name of each occurrence must be known.,,
+SECOND_CHALLENGE,SCQ4,Annotations and Filtering,AnnotationsFiltering-06,The parameters of each occurrence must be known.,,
+SECOND_CHALLENGE,SCQ4,Ordering/Time,OrderingTime-01,The execution time of each occurrence must be known.,,
+SECOND_CHALLENGE,SCQ5,Identity,Identity-01,Exact recorded data items must be distinguishable.,,
+SECOND_CHALLENGE,SCQ5,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+SECOND_CHALLENGE,SCQ5,Annotations and Filtering,AnnotationsFiltering-07,Header values must be known.,,
+SECOND_CHALLENGE,SCQ5,Producer-Consumer relationship,ProducerConsumer-03,"It must be known which process consumed each header, where a consumer is represented in the selected history.",PC2,Which Executions consumed a selected State?
+SECOND_CHALLENGE,SCQ5,Producer-Consumer relationship,ProducerConsumer-04,"It must be known which process produced each later data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+SECOND_CHALLENGE,SCQ5,Annotations and Filtering,AnnotationsFiltering-08,Data item types must be known.,,
+SECOND_CHALLENGE,SCQ6,Identity,Identity-01,Exact recorded data items must be distinguishable.,,
+SECOND_CHALLENGE,SCQ6,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+SECOND_CHALLENGE,SCQ6,Producer-Consumer relationship,ProducerConsumer-01,"It must be known which process produced each data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+SECOND_CHALLENGE,SCQ6,Producer-Consumer relationship,ProducerConsumer-02,"It must be known which process consumed each data item, where a consumer is represented in the selected history.",PC2,Which Executions consumed a selected State?
+SECOND_CHALLENGE,SCQ6,Annotations and Filtering,AnnotationsFiltering-01,The process name must be known.,,
+SECOND_CHALLENGE,SCQ6,Annotations and Filtering,AnnotationsFiltering-09,Parameter values must be known.,,
+SECOND_CHALLENGE,SCQ6,Annotations and Filtering,AnnotationsFiltering-08,Data item types must be known.,,
+SECOND_CHALLENGE,SCQ7,Identity,Identity-03,Exact recorded data items must be distinguishable within each run.,,
+SECOND_CHALLENGE,SCQ7,Identity,Identity-04,Exact recorded process occurrences must be distinguishable within each run.,,
+SECOND_CHALLENGE,SCQ7,Identity,Identity-05,Corresponding parts of the two runs must be identifiable.,,
+SECOND_CHALLENGE,SCQ7,Producer-Consumer relationship,ProducerConsumer-01,"It must be known which process produced each data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+SECOND_CHALLENGE,SCQ7,Producer-Consumer relationship,ProducerConsumer-02,"It must be known which process consumed each data item, where a consumer is represented in the selected history.",PC2,Which Executions consumed a selected State?
+SECOND_CHALLENGE,SCQ7,Annotations and Filtering,AnnotationsFiltering-10,The compared process details must be known.,,
+SECOND_CHALLENGE,SCQ7,Annotations and Filtering,AnnotationsFiltering-11,The compared data details must be known.,,
+SECOND_CHALLENGE,SCQ7,Annotations and Filtering,AnnotationsFiltering-12,The compared attribute details must be known.,,
+SECOND_CHALLENGE,SCQ8,Identity,Identity-01,Exact recorded data items must be distinguishable.,,
+SECOND_CHALLENGE,SCQ8,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+SECOND_CHALLENGE,SCQ8,Annotations and Filtering,AnnotationsFiltering-13,Data annotations must be known.,,
+SECOND_CHALLENGE,SCQ8,Producer-Consumer relationship,ProducerConsumer-05,"It must be known which process consumed each input, where a consumer is represented in the selected history.",PC2,Which Executions consumed a selected State?
+SECOND_CHALLENGE,SCQ8,Producer-Consumer relationship,ProducerConsumer-06,It must be known which data items each process produced.,PC4,Which exact States did a selected Execution produce?
+SECOND_CHALLENGE,SCQ8,Annotations and Filtering,AnnotationsFiltering-01,The process name must be known.,,
+SECOND_CHALLENGE,SCQ8,Annotations and Filtering,AnnotationsFiltering-08,Data item types must be known.,,
+SECOND_CHALLENGE,SCQ9,Identity,Identity-01,Exact recorded data items must be distinguishable.,,
+SECOND_CHALLENGE,SCQ9,Annotations and Filtering,AnnotationsFiltering-14,Their annotation keys must be known.,,
+SECOND_CHALLENGE,SCQ9,Annotations and Filtering,AnnotationsFiltering-15,Their annotation values must be known.,,
+SECOND_CHALLENGE,SCQ9,Annotations and Filtering,AnnotationsFiltering-08,Data item types must be known.,,
+THIRD_CHALLENGE,TCQ1,Identity,Identity-06,Exact recorded rows must be distinguishable.,,
+THIRD_CHALLENGE,TCQ1,Identity,Identity-07,Exact recorded files must be distinguishable.,,
+THIRD_CHALLENGE,TCQ1,Identity,Identity-01,Exact recorded data items must be distinguishable.,,
+THIRD_CHALLENGE,TCQ1,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+THIRD_CHALLENGE,TCQ1,Producer-Consumer relationship,ProducerConsumer-07,"It must be known which processes produced each relevant data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+THIRD_CHALLENGE,TCQ1,Producer-Consumer relationship,ProducerConsumer-08,It must be known which processes used each relevant data item.,PC2,Which Executions consumed a selected State?
+THIRD_CHALLENGE,TCQ1,Domain Semantics,DomainSemantics-01,The database foreign-key relationships needed for the advanced answer must be known.,,
+THIRD_CHALLENGE,TCQ1,Annotations and Filtering,AnnotationsFiltering-24,File names must be known.,,
+THIRD_CHALLENGE,TCQ2,Identity,Identity-08,Exact recorded table data must be distinguishable.,,
+THIRD_CHALLENGE,TCQ2,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+THIRD_CHALLENGE,TCQ2,Producer-Consumer relationship,ProducerConsumer-09,It must be known which data the range-check occurrence used.,PC3,Which exact States did a selected Execution consume?
+THIRD_CHALLENGE,TCQ2,Execution Status,ExecutionStatus-01,The execution status of the range-check occurrence must be known.,,
+THIRD_CHALLENGE,TCQ2,Annotations and Filtering,AnnotationsFiltering-01,The process name must be known.,,
+THIRD_CHALLENGE,TCQ3,Identity,Identity-09,Exact recorded values must be distinguishable.,,
+THIRD_CHALLENGE,TCQ3,Identity,Identity-01,Exact recorded data items must be distinguishable.,,
+THIRD_CHALLENGE,TCQ3,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+THIRD_CHALLENGE,TCQ3,Producer-Consumer relationship,ProducerConsumer-10,"It must be known which process consumed each relevant data item, where a consumer is represented in the selected history.",PC2,Which Executions consumed a selected State?
+THIRD_CHALLENGE,TCQ3,Producer-Consumer relationship,ProducerConsumer-11,"It must be known which process produced each relevant data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+THIRD_CHALLENGE,TCQ3,Domain Semantics,DomainSemantics-02,Operation effects on the selected value must be known.,,
+THIRD_CHALLENGE,TCQ5,Identity,Identity-10,Exact plot data must be distinguishable.,,
+THIRD_CHALLENGE,TCQ5,Identity,Identity-11,Exact rows must be distinguishable.,,
+THIRD_CHALLENGE,TCQ5,Identity,Identity-12,Exact tables must be distinguishable.,,
+THIRD_CHALLENGE,TCQ5,Identity,Identity-13,Exact CSV files must be distinguishable.,,
+THIRD_CHALLENGE,TCQ5,Identity,Identity-14,Exact process occurrences must be distinguishable.,,
+THIRD_CHALLENGE,TCQ5,Domain Semantics,DomainSemantics-03,The plot-to-row relationships must be known.,,
+THIRD_CHALLENGE,TCQ5,Domain Semantics,DomainSemantics-04,The row-to-table relationships must be known.,,
+THIRD_CHALLENGE,TCQ5,Producer-Consumer relationship,ProducerConsumer-12,It must be known which processes produced or used each relevant data item.,PC1;PC2,Which Execution produced a selected State?; Which Executions consumed a selected State?
+THIRD_CHALLENGE,TCQ5,Annotations and Filtering,AnnotationsFiltering-24,File names must be known.,,
+THIRD_CHALLENGE,TOQ1,Identity,Identity-14,Exact process occurrences must be distinguishable.,,
+THIRD_CHALLENGE,TOQ1,Identity,Identity-15,Exact table data items must be distinguishable.,,
+THIRD_CHALLENGE,TOQ1,Execution Status,ExecutionStatus-02,Execution status must be known.,,
+THIRD_CHALLENGE,TOQ1,Ordering/Time,OrderingTime-02,Execution ordering must be known.,,
+THIRD_CHALLENGE,TOQ1,Producer-Consumer relationship,ProducerConsumer-13,It must be known which load occurrence processed each table.,PC2,Which Executions consumed a selected State?
+THIRD_CHALLENGE,TOQ2,Identity,Identity-14,Exact process occurrences must be distinguishable.,,
+THIRD_CHALLENGE,TOQ2,Identity,Identity-16,Exact relevant data items must be distinguishable.,,
+THIRD_CHALLENGE,TOQ2,Producer-Consumer relationship,ProducerConsumer-14,"It must be known which process occurrence produced each relevant data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+THIRD_CHALLENGE,TOQ2,Producer-Consumer relationship,ProducerConsumer-15,"It must be known which process occurrence consumed each relevant data item, where a consumer is represented in the selected history.",PC2,Which Executions consumed a selected State?
+THIRD_CHALLENGE,TOQ2,Domain Semantics,DomainSemantics-05,Process effects must be known.,,
+THIRD_CHALLENGE,TOQ2,Domain Semantics,DomainSemantics-06,Value equivalence must be known.,,
+THIRD_CHALLENGE,TOQ2,Domain Semantics,DomainSemantics-07,Control-flow constraints must be known.,,
+THIRD_CHALLENGE,TOQ2,Domain Semantics,DomainSemantics-08,Loop constraints must be known.,,
+THIRD_CHALLENGE,TOQ3,Ordering/Time,OrderingTime-03,Their execution times must be known.,,
+THIRD_CHALLENGE,TOQ3,Execution Status,ExecutionStatus-03,Their execution statuses must be known.,,
+THIRD_CHALLENGE,TOQ3,Domain Semantics,DomainSemantics-09,Exact test occurrences must be distinguishable.,,
+THIRD_CHALLENGE,TOQ4,Identity,Identity-17,Exact data items must be distinguishable.,,
+THIRD_CHALLENGE,TOQ4,Identity,Identity-14,Exact process occurrences must be distinguishable.,,
+THIRD_CHALLENGE,TOQ4,Producer-Consumer relationship,ProducerConsumer-01,"It must be known which process produced each data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+THIRD_CHALLENGE,TOQ4,Producer-Consumer relationship,ProducerConsumer-02,"It must be known which process consumed each data item, where a consumer is represented in the selected history.",PC2,Which Executions consumed a selected State?
+THIRD_CHALLENGE,TOQ4,Domain Semantics,DomainSemantics-10,Values must be known.,,
+THIRD_CHALLENGE,TOQ4,Domain Semantics,DomainSemantics-11,Operation meaning must be known.,,
+THIRD_CHALLENGE,TOQ4,Domain Semantics,DomainSemantics-12,Causal explanation must be known.,,
+THIRD_CHALLENGE,TOQ4,Domain Semantics,DomainSemantics-13,Domain explanation must be known.,,
+THIRD_CHALLENGE,TOQ5,Identity,Identity-18,Exact workflow executions must be distinguishable.,,
+THIRD_CHALLENGE,TOQ5,Execution Status,ExecutionStatus-02,Execution status must be known.,,
+THIRD_CHALLENGE,TOQ5,Annotations and Filtering,AnnotationsFiltering-16,Input-data-set association must be known.,,
+THIRD_CHALLENGE,TOQ6,Identity,Identity-19,Repeated process occurrences must be distinguishable.,,
+THIRD_CHALLENGE,TOQ6,Annotations and Filtering,AnnotationsFiltering-01,The process name must be known.,,
+THIRD_CHALLENGE,TOQ6,Annotations and Filtering,AnnotationsFiltering-17,Occurrence count must be known.,,
+THIRD_CHALLENGE,TOQ6,Execution Status,ExecutionStatus-02,Execution status must be known.,,
+THIRD_CHALLENGE,TOQ7,Identity,Identity-14,Exact process occurrences must be distinguishable.,,
+THIRD_CHALLENGE,TOQ7,Identity,Identity-17,Exact data items must be distinguishable.,,
+THIRD_CHALLENGE,TOQ7,Producer-Consumer relationship,ProducerConsumer-16,It must be known which data was incident to the halted process.,PC3,Which exact States did a selected Execution consume?
+THIRD_CHALLENGE,TOQ7,Annotations and Filtering,AnnotationsFiltering-18,Data granularity information must be known.,,
+THIRD_CHALLENGE,TOQ8,Identity,Identity-19,Repeated process occurrences must be distinguishable.,,
+THIRD_CHALLENGE,TOQ8,Annotations and Filtering,AnnotationsFiltering-01,The process name must be known.,,
+THIRD_CHALLENGE,TOQ8,Execution Status,ExecutionStatus-02,Execution status must be known.,,
+THIRD_CHALLENGE,TOQ8,Ordering/Time,OrderingTime-04,Execution order must be known.,,
+THIRD_CHALLENGE,TOQ9,Identity,Identity-20,Planned process occurrences must be distinguishable.,,
+THIRD_CHALLENGE,TOQ9,Domain Semantics,DomainSemantics-14,The prospective workflow/control model must be known.,,
+THIRD_CHALLENGE,TOQ9,Execution Status,ExecutionStatus-04,The realised execution status of planned occurrences must be known.,,
+THIRD_CHALLENGE,TOQ10,Identity,Identity-21,Exact input data items must be distinguishable.,,
+THIRD_CHALLENGE,TOQ10,Annotations and Filtering,AnnotationsFiltering-19,Their association with the workflow execution must be known.,,
+THIRD_CHALLENGE,TOQ10,Annotations and Filtering,AnnotationsFiltering-20,User-input role information must be known.,,
+THIRD_CHALLENGE,TOQ11,Identity,Identity-22,Exact input data must be distinguishable.,,
+THIRD_CHALLENGE,TOQ11,Identity,Identity-14,Exact process occurrences must be distinguishable.,,
+THIRD_CHALLENGE,TOQ11,Producer-Consumer relationship,ProducerConsumer-05,"It must be known which process consumed each input, where a consumer is represented in the selected history.",PC2,Which Executions consumed a selected State?
+THIRD_CHALLENGE,TOQ11,Annotations and Filtering,AnnotationsFiltering-20,User-input role information must be known.,,
+THIRD_CHALLENGE,TOQ12,Identity,Identity-23,Exact files must be distinguishable.,,
+THIRD_CHALLENGE,TOQ12,Identity,Identity-14,Exact process occurrences must be distinguishable.,,
+THIRD_CHALLENGE,TOQ12,Producer-Consumer relationship,ProducerConsumer-17,It must be known which processes handled each file.,PC2,Which Executions consumed a selected State?
+THIRD_CHALLENGE,TOQ12,Execution Status,ExecutionStatus-05,Status must be known.,,
+THIRD_CHALLENGE,TOQ12,Ordering/Time,OrderingTime-04,Execution order must be known.,,
+THIRD_CHALLENGE,TOQ12,Annotations and Filtering,AnnotationsFiltering-24,File names must be known.,,
+THIRD_CHALLENGE,TOQ13,Identity,Identity-17,Exact data items must be distinguishable.,,
+THIRD_CHALLENGE,TOQ13,Identity,Identity-14,Exact process occurrences must be distinguishable.,,
+THIRD_CHALLENGE,TOQ13,Producer-Consumer relationship,ProducerConsumer-01,"It must be known which process produced each data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+THIRD_CHALLENGE,TOQ13,Producer-Consumer relationship,ProducerConsumer-02,"It must be known which process consumed each data item, where a consumer is represented in the selected history.",PC2,Which Executions consumed a selected State?
+THIRD_CHALLENGE,TOQ14,Domain Semantics,DomainSemantics-15,Exact rows must be distinguishable.,,
+THIRD_CHALLENGE,TOQ14,Domain Semantics,DomainSemantics-16,The database values must be known.,,
+THIRD_CHALLENGE,TOQ14,Domain Semantics,DomainSemantics-17,The foreign-key relationships must be known.,,
+THIRD_CHALLENGE,TOQ14,Domain Semantics,DomainSemantics-18,The plot query must be known.,,
+THIRD_CHALLENGE,TOQ14,Domain Semantics,DomainSemantics-19,The domain mapping must be known.,,
+THIRD_CHALLENGE,TOQ15,Domain Semantics,DomainSemantics-20,Exact database rows must be distinguishable.,,
+THIRD_CHALLENGE,TOQ15,Domain Semantics,DomainSemantics-21,Their values must be known.,,
+THIRD_CHALLENGE,TOQ15,Domain Semantics,DomainSemantics-22,Both query definitions must be known.,,
+THIRD_CHALLENGE,TOQ15,Domain Semantics,DomainSemantics-23,Set-difference semantics must be known.,,
+MLMD,MGQ1,Identity,Identity-01,Exact recorded data items must be distinguishable.,,
+MLMD,MGQ1,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+MLMD,MGQ1,Producer-Consumer relationship,ProducerConsumer-01,"It must be known which process produced each data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+MLMD,MGQ1,Producer-Consumer relationship,ProducerConsumer-02,"It must be known which process consumed each data item, where a consumer is represented in the selected history.",PC2,Which Executions consumed a selected State?
+MLMD,MGQ1,Annotations and Filtering,AnnotationsFiltering-08,Data item types must be known.,,
+MLMD,MGQ2,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+MLMD,MGQ2,Annotations and Filtering,AnnotationsFiltering-21,Parameter names and values must be known.,,
+MLMD,MGQ2,Identity,Identity-01,Exact recorded data items must be distinguishable.,,
+MLMD,MGQ2,Producer-Consumer relationship,ProducerConsumer-01,"It must be known which process produced each data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+MLMD,MGQ3,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+MLMD,MGQ3,Annotations and Filtering,AnnotationsFiltering-22,The pipeline-run associated with each occurrence must be known.,,
+MLMD,MGQ3,Identity,Identity-01,Exact recorded data items must be distinguishable.,,
+MLMD,MGQ3,Producer-Consumer relationship,ProducerConsumer-01,"It must be known which process produced each data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+MLMD,MGQ4,Identity,Identity-01,Exact recorded data items must be distinguishable.,,
+MLMD,MGQ4,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+MLMD,MGQ4,Producer-Consumer relationship,ProducerConsumer-01,"It must be known which process produced each data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+MLMD,MGQ5,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+MLMD,MGQ5,Annotations and Filtering,AnnotationsFiltering-23,Software/environment version metadata must be known.,,
+MLMD,MGQ5,Identity,Identity-01,Exact recorded data items must be distinguishable.,,
+MLMD,MGQ5,Producer-Consumer relationship,ProducerConsumer-01,"It must be known which process produced each data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+MLMD,MGQ6,Identity,Identity-01,Exact recorded data items must be distinguishable.,,
+MLMD,MGQ6,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+MLMD,MGQ6,Execution Status,ExecutionStatus-02,Execution status must be known.,,
+MLMD,MGQ6,Ordering/Time,OrderingTime-05,Execution time must be known.,,
+MLMD,MGQ6,Producer-Consumer relationship,ProducerConsumer-01,"It must be known which process produced each data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+MLMD,MTQ1,Identity,Identity-01,Exact recorded data items must be distinguishable.,,
+MLMD,MTQ1,Identity,Identity-02,Exact recorded process occurrences must be distinguishable.,,
+MLMD,MTQ1,Producer-Consumer relationship,ProducerConsumer-02,"It must be known which process consumed each data item, where a consumer is represented in the selected history.",PC2,Which Executions consumed a selected State?
+MLMD,MTQ1,Producer-Consumer relationship,ProducerConsumer-01,"It must be known which process produced each data item, where a producer is represented in the selected history.",PC1,Which Execution produced a selected State?
+MLMD,MTQ1,Annotations and Filtering,AnnotationsFiltering-08,Data item types must be known.,,

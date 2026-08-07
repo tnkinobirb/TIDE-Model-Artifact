@@ -1,0 +1,10 @@
+Source,Source_item,Decision,Corpus_label,Reason,Source_URL
+Second Provenance Challenge,All nine provenance queries,retained,SCQ1-SCQ9,The page declares the tightened nine-query set inherited from the first challenge.,https://openprovenance.org/provenance-challenge/SecondProvenanceChallenge.html
+Third Provenance Challenge,Core Query 4,excluded,,The source itself removes this query as a core query because it is similar to Core Query 1.,https://openprovenance.org/provenance-challenge/ProvenanceQuestionsPc3.html
+Third Provenance Challenge,Four live core queries and fifteen optional queries,retained,TCQ1-TCQ5 excluding TCQ4 plus TOQ1-TOQ15,These are the live question sets declared by the source page.,https://openprovenance.org/provenance-challenge/ProvenanceQuestionsPc3.html
+MLMD guide,All six listed questions,retained,MGQ1-MGQ6,The guide presents these as concrete questions MLMD can help answer.,https://www.tensorflow.org/tfx/guide/mlmd
+MLMD tutorial,Tutorial debugging-strategy question,excluded,,It asks for an efficient strategy rather than one fixed record answer.,https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial
+MLMD tutorial,Tutorial training-dataset question,excluded,,It duplicates the answer target already retained as MGQ1.,https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial
+MLMD tutorial,Tutorial training-run question,excluded,,It duplicates the answer target already retained as MGQ4.,https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial
+MLMD tutorial,Tutorial evaluation-results question,retained,MTQ1,It supplies a distinct direct artifact-location answer not duplicated by the guide set.,https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial
+MLMD tutorial,Tutorial where-to-begin-debugging question,excluded,,It asks for diagnostic guidance and overlaps the broader strategy question rather than defining one fixed information answer.,https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial

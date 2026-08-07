@@ -1,0 +1,36 @@
+Corpus,Question,Target_type_and_filter_conditions_supplied_by_source
+SECOND_CHALLENGE,SCQ1,Selected output is Atlas X Graphic and the requested direction is complete upstream history.
+SECOND_CHALLENGE,SCQ2,Selected output is Atlas X Graphic and history before the softmean output boundary is excluded.
+SECOND_CHALLENGE,SCQ3,Selected output is Atlas X Graphic and only Stages 3 to 5 and their details are requested.
+SECOND_CHALLENGE,SCQ4,Process type is align_warp with parameter -m 12 and execution day Monday.
+SECOND_CHALLENGE,SCQ5,Output type is Atlas Graphic and at least one input Anatomy Header must contain global maximum 4095.
+SECOND_CHALLENGE,SCQ6,Output type is softmean image and an upstream align_warp occurrence must use -m 12.
+SECOND_CHALLENGE,SCQ7,Two runs use the same inputs and the second replaces convert with pgmtoppm followed by pnmtojpeg.
+SECOND_CHALLENGE,SCQ8,Output type is align_warp output and an input must carry center=UChicago.
+SECOND_CHALLENGE,SCQ9,Target is a graphical atlas set whose studyModality is speech visual or audio; other annotations are also requested.
+THIRD_CHALLENGE,TCQ1,Target is a selected detection and the requested answer is the names of contributing CSV files.
+THIRD_CHALLENGE,TCQ2,Target is a selected unexpected-value table and process type is IsMatchTableColumnRanges.
+THIRD_CHALLENGE,TCQ3,Target is a particular non-computed value in the Image table and the criterion is strict necessity.
+THIRD_CHALLENGE,TCQ5,Target is a selected zoneGroup in the DisplayPlot output and the requested answer is the names of contributing CSV files.
+THIRD_CHALLENGE,TOQ1,Target is the halted execution and the boundary is the failed IsMatchTableColumnRanges check.
+THIRD_CHALLENGE,TOQ2,Target is the supplied workflow and data; candidate procedure pairs must preserve the same result.
+THIRD_CHALLENGE,TOQ3,Endpoints are the successful IsMatchCSVFileTables check and failed IsExistsCSVFile check around a deletion.
+THIRD_CHALLENGE,TOQ4,Target is a selected database entry and the requested answer is explanatory.
+THIRD_CHALLENGE,TOQ5,Target is one of several executions over named input datasets and the filter is halted status.
+THIRD_CHALLENGE,TOQ6,Target is the halted execution and repeated process calls must be distinguished.
+THIRD_CHALLENGE,TOQ7,Target is the halt point and the requested data must include granularity.
+THIRD_CHALLENGE,TOQ8,Target is the halted execution and only successfully completed preceding steps qualify.
+THIRD_CHALLENGE,TOQ9,Target is the halted execution and planned steps unrealised because of the halt qualify.
+THIRD_CHALLENGE,TOQ10,Target is one selected workflow execution and only user inputs qualify.
+THIRD_CHALLENGE,TOQ11,Target is one selected workflow execution and only steps requiring user inputs qualify.
+THIRD_CHALLENGE,TOQ12,Target is a halted execution and the requested answer is the names of files that completed required processing successfully.
+THIRD_CHALLENGE,TOQ13,Target is one workflow execution and requested view types are data and step dependency.
+THIRD_CHALLENGE,TOQ14,Target is a selected plot zoneGroup and requested records are corresponding ImageMeta rows.
+THIRD_CHALLENGE,TOQ15,Target is a selected plot zoneGroup and rows must be present in one named query result but absent from the other.
+MLMD,MGQ1,Target is a selected model and requested data role is its training dataset.
+MLMD,MGQ2,Target is a selected model and requested properties are training hyperparameters.
+MLMD,MGQ3,Target is a selected model and requested context type is pipeline run.
+MLMD,MGQ4,Target is a selected model and requested occurrence type is training run.
+MLMD,MGQ5,Target is a selected model and requested environment property is TensorFlow version.
+MLMD,MGQ6,Target is the failed model and requested event property is push time.
+MLMD,MTQ1,Target is the erroneous model and requested artifact role is model-evaluation result.

@@ -1,0 +1,471 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,array,tabularx,microtype,needspace,flushend,url,placeins,float}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+pdftitle={TIDE: A Domain-Independent Semantic Contract for Exact Execution Relationships},
+pdfauthor={Gabriel Dolbear},
+pdfkeywords={execution records, mapped-scope conformance, exact execution relationships, provenance interoperability}
+}
+
+\newtheoremstyle{tideproposition}{0.35ex}{0.35ex}{\normalfont}{}{\bfseries}{.}{0.45em}{}
+\theoremstyle{tideproposition}
+\newtheorem{proposition}{Proposition}
+\newcommand{\direct}[3]{#1\xrightarrow{#2}#3}
+\newcommand{\reach}{\rightsquigarrow}
+\newcommand{\reviewitem}[1]{\par\addvspace{0.22\baselineskip}\noindent\emph{#1.}\ }
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\same}{\ensuremath{=}}
+\newcommand{\diff}{\ensuremath{\ne}}
+
+\title{TIDE: A Domain-Independent Semantic Contract for Exact Execution Relationships}
+
+\author{\IEEEauthorblockN{Gabriel Dolbear}
+\IEEEauthorblockA{Independent Researcher\\\href{mailto:gabrieldolbear@gmail.com}{gabrieldolbear@gmail.com}}}
+
+\begin{document}
+\maketitle
+
+\setlength{\abovedisplayskip}{0.9ex plus 2pt minus 1pt}
+\setlength{\belowdisplayskip}{0.9ex plus 2pt minus 1pt}
+\setlength{\abovedisplayshortskip}{0pt plus 2pt}
+\setlength{\belowdisplayshortskip}{0.9ex plus 2pt minus 1pt}
+
+\begin{abstract}
+Systems often retain \emph{execution records}: evidence about completed work, including which occurrence happened, which data it consumed or produced, and the conditions under which it ran. Such records support origin, ancestry, and downstream-inspection questions. Yet two records pertaining to the same work may preserve similar evidence while disagreeing about the exact relationships. To determine what records must distinguish and compare, this paper audits 35 questions from the Second and Third Provenance Challenges and ML Metadata (MLMD). The audit identifies six recurring requirement types. Producer--Consumer relationship occurs in 25 questions across all three corpora and is selected as a shared structural requirement that does not replace host-specific semantics. Its recurring forms ask which process produced or consumed a data item and which inputs and outputs belong to a process. A scoped review finds that existing approaches can often encode these facts, but admissible records may omit selected answers. It identifies no single formal mechanism for exact cross-representation comparison of all four selected answer forms independently of host semantics. TIDE addresses this derived gap within supplied projections through exact Execution--State input/output incidence, validity rules preventing ambiguity and cyclic ancestry, fixed relationship answers, and comparison under supplied identity maps. A small reference comparator applies the contract to one Dagster run and one Python run emitting OpenLineage events over the same six functions. Their retained native records agree about observed relationships; controlled comparisons distinguish partial scope, exact relationship differences, and invalidity. This evidence shows what one comparator can determine after interpretation and identity correspondence are supplied. It neither establishes native-record truth nor discovers correspondence.
+\end{abstract}
+
+\begin{IEEEkeywords}
+execution records, mapped-scope conformance, exact execution relationships, provenance interoperability
+\end{IEEEkeywords}
+
+\section{Introduction}
+Work can be represented by a workflow-management system, a lineage event model, a metadata store, or a portable provenance package, each retaining execution evidence for a different purpose and at a different level of detail~\cite{openlineage-object,mlmd-guide,wfrun}. When multiple tools contribute evidence about one result, their provenance may need to be integrated or queried through a common representation~\cite{mediator,ppif}. Each record can remain useful for its native purpose, yet an operator investigating a result, a platform team reconciling histories, or a consumer tracing downstream effects may still need to determine whether the represented relationships agree.
+
+Comparison here cannot mean byte-for-byte equality or forcing every record into one native schema. Identifiers, terminology, granularity, and host-specific meaning may legitimately differ across systems~\cite{wfrun,mediator}. Comparison instead requires a question that can be asked of both records, correspondence between the occurrences being compared, and a rule for determining whether both records preserve the same answers. Without an explicit target, similar-looking records may conceal a material disagreement, while differently structured records may be rejected despite agreeing on the information that matters.
+
+The paper therefore begins by asking what execution records must distinguish for such comparison to be meaningful. A bounded audit of provenance and execution-metadata questions identifies recurring requirements expressed through the intended uses of those records~\cite{artifact}. A scoped review then follows that requirement into existing approaches, asking whether their admissible records require the selected answers and whether their comparison mechanisms compare those answers across representations.
+
+This turns a broad interoperability concern into precise needs. After the audit and review, the paper proposes TIDE as a contract for stating and comparing the selected relationship answers. The remaining sections define the contract, prove its guarantees, evaluate what one comparator can determine from separately represented evidence, and state the boundaries of those results. The contribution arises directly from the identified audited needs and formally checked answers---TIDE is not a workflow system or provenance vocabulary.
+
+\Needspace{13\baselineskip}
+\section{Research Questions}
+
+\textbf{RQ1.} Across the bounded question corpus, what exact answers are requested, and which recurring domain-independent information requirements are needed to produce them?
+
+\textbf{RQ2.} Which recurring requirements are selected for formalisation, can existing approaches retain them in their admissible records, and what do their cross-system mechanisms require and compare?
+
+\textbf{RQ3.} What contract preserves the selected requirements and defines their validity and exact answer sets?
+
+\textbf{RQ4.} What does applying this contract enable one host-independent comparator to determine about separately represented records?
+
+\section{Question Audit and Recurring Requirement Decomposition}
+\subsection{Bounded Corpus and Audit Method}
+The bounded corpus contains nine questions analysed from the Second Provenance Challenge, all four core and fifteen optional Third Challenge questions, and seven MLMD questions---six from the guide and one from the tutorial~\cite{mlmd-guide,second-challenge,third-challenge-questions,mlmd-tutorial}. These sources state concrete questions expected of provenance or lineage tools; MLMD adds a modern execution-metadata setting. The corpus closes when every question in those declared sets has been reviewed. The retained audit records the selection rationale, protocol, question mappings, and aggregation~\cite{artifact}.
+
+For each question, the audit records: (1) the requested answer; (2) the target, type, and filter conditions already supplied; and (3) the information that must be preserved to produce that answer. Table~\ref{tab:need} gives the six resulting requirement types and their counts. One author performed these classifications; they are not source terminology, and the retained question-level map makes each decision inspectable.
+
+\begin{table}[H]
+\caption{Requirement types identified by the 35-question audit. Counts overlap because one question may require several types.}
+\label{tab:need}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{2.4pt}
+\begin{tabularx}{\columnwidth}{@{}p{0.25\columnwidth}Yp{0.11\columnwidth}@{}}
+\toprule
+Requirement type & Required when & Count\\
+\midrule
+Identity & exact recorded data items or process occurrences must be distinguishable. & 32\\
+Producer-Consumer relationship & which process produced or consumed a data item, or which data items a process consumed or produced, must be known & 25\\
+Execution Status & success, failure, completion, or halt state affects the answer & 9\\
+Ordering/Time & time, elapsed duration, or order affects the answer & 6\\
+Domain Semantics & domain-specific records, values, joins, queries, effects, or operation meaning must be interpreted & 9\\
+Annotations and Filtering & names, types, roles, parameters, metadata, or context select the answer & 23\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Selected Requirement and Boundary}
+
+Each recurring type was checked against three conditions: it had to (1) recur across questions; (2) answer domain-independent questions; and (3) be representable without replacing domain-specific semantics. Producer--Consumer relationship meets all three. It appears in 25 questions across the Second Challenge, Third Challenge, and MLMD, and asks which realised process occurrence produced or consumed which data item.
+
+Other types contribute to differing necessities. Identity distinguishes the participants but does not state their relationship; Annotations and Filtering select participants; Execution Status and Ordering/Time qualify answers; and Domain Semantics supplies source-specific interpretation. They remain necessary where the audit records them, but they are not subjects selected for formalisation here.
+
+Within those 25 questions, the recurring subject-specific wording normalises to four exact answers: which process occurrence produced a selected data item; which process occurrences consumed it; which exact data items a process occurrence consumed; and which exact data items it produced. Those answers require distinguishable realised process identities, distinguishable realised data-item identities, and directed production and consumption relationships.
+
+The selection does not reduce every audited question to lineage. Questions about causes, consequences, values, failure, timing, parameters, comparison, or planned work also require the other types in Table~\ref{tab:need}. The next section therefore asks one narrower question: do existing approaches both retain these four selected answers and compare them across independently represented records?
+
+\begin{table*}[!t]
+\caption{Scoped review against the selected four-answer Producer--Consumer requirement. ``Admissible'' uses each work's own acceptance criterion.}
+\label{tab:prior}
+\centering
+\scriptsize
+\renewcommand{\arraystretch}{0.96}
+\setlength{\tabcolsep}{1.7pt}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.085\textwidth}p{0.17\textwidth}p{0.205\textwidth}p{0.21\textwidth}Y@{}}
+\toprule
+Work & Can retain the four answers? & Does an admissible record require them? & Cross-record mechanism & Supplied boundary and actual check\\
+\midrule
+OPM\newline\cite{opm} & Yes: \emph{used} and \emph{was generated by} identify Process--Artifact incidence. & No. A legal graph may retain lossy \emph{was triggered by}; the hidden Artifact exists but its identity is unavailable. & Structural equality, persistent names, profiles, and refinement by inferred multistep dependencies. & Profile conventions or cross-graph names are supplied. These mechanisms preserve or infer OPM structure, not four-answer completeness.\\
+PROV\newline\cite{prov-dm,prov-constraints} & Yes: \texttt{used} and \texttt{wasGeneratedBy} identify Activity--Entity incidence. & No. \texttt{wasInformedBy} permits communication through an unspecified Entity; normalization supplies an existential, not its recorded occurrence identity. & Validity and equivalence by normalization and isomorphism of valid normal forms. & Applications resolve URI co-reference first. Equivalence checks complete PROV normal-form information, not selected four-answer completeness.\\
+Mediator\newline\cite{mediator} & Yes, when wrappers expose execution--data relationships in the global schema. & No source-independent completeness rule; native omissions and representational choices are resolved by each wrapper. & One mediated schema with common local and transitive query operations. & Wrapper authors supply native semantics and identifiers. The case study demonstrates common queries, not pairwise answer equivalence.\\
+CPF\newline\cite{cpf} & Yes, when the exchanged OPM graph includes the relevant typed and named entities. & No. A single exported entity plus a dictionary reference may be sufficient; complete history need not be transmitted. & Source identifiers, naming dictionaries, and proposed Schematron enforcement. & Dictionary mappings are supplied. These checks target CPF constraints, not four-answer equality.\\
+ProvONE/\newline P-PIF\newline\cite{ppif} & Yes: ProvONE can represent prospective and retrospective workflow relationships. & Dependent on the exported retrospective trace; the reviewed proof does not require a complete four-answer run record. & A common ProvONE graph and SPARQL interface; a proved Prov2ONE translation algorithm. & Vocabulary rules and adapters are supplied. The proof concerns prospective workflow translation, not pairwise retrospective-answer preservation.\\
+Workflow\newline Run RO-Crate\newline\cite{wfrun,wfrun-profile} & Yes, through action \texttt{object}/\texttt{result} links and optional step detail. & No. In Process Run Crate, \texttt{object} is MAY and \texttt{result} is SHOULD. & Shared packaging and run profiles support heterogeneous consumption and comparison. & Native identifiers and record interpretation remain supplied. Its conformance checks declared requirements, not pairwise answer equality.\\
+ProvAbs\newline\cite{provabs} & The source may; an abstract output may replace exact nodes and remove internal edges. & No. Deliberate abstraction can remove exact identities while retaining a valid PROV graph without unjustified new relations. & A formal grouping transformation with source sets and a policy. & The grouping set and policy are supplied. Rules preserve scoped validity and relation soundness, not answer reflection.\\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+\section{Existing Formalisations and the Remaining Gap}
+
+After the audit selected Producer--Consumer relationship, the review applied five fixed questions to each work: (1) can it represent the four primitive answers; (2) can its own admissible or minimum record omit information needed for one of them; (3) does it define a formal comparison between independently represented records; (4) what interpretation or identity alignment must be supplied; and (5) what validity, equivalence, translation, or conformance rules are actually checked? Table~\ref{tab:prior} reports those answers. The reviewed set is scoped rather than exhaustive; it compares only the selected requirement and does not rank general provenance expressiveness.
+
+The review found the required facts are widely representable. OPM's \emph{used} and \emph{was generated by} edges and PROV's \texttt{used} and \texttt{wasGeneratedBy} relations directly retain identified process--data incidence~\cite{opm,prov-dm}. The mediator's global schema and API and Workflow Run RO-Crate likewise expose execution inputs and outputs when their source mappings or declared record requirements provide them~\cite{wfrun,mediator}. The review gap is therefore not an inability of existing models to encode the four answers.
+
+Representability, however, is not a completeness guarantee. OPM explicitly defines \emph{was triggered by} as a lossy Process summary: completion can introduce the existence of a joining Artifact but cannot recover its identifier~\cite{opm}. PROV similarly defines \texttt{wasInformedBy} as communication through an unspecified Entity. PROV normalization can infer an existential Entity generated by one Activity and used by the other, but it does not recover the identity of the data occurrence asked for by the four-answer requirement~\cite{prov-dm,prov-constraints}. Other omissions are deliberate rather than defective. CPF permits an export consisting of one Entity and a dictionary reference instead of its complete history~\cite{cpf}; Process Run Crate makes action inputs optional and outputs recommended rather than mandatory~\cite{wfrun-profile}; and ProvAbs can replace exact nodes while preserving scoped PROV validity and avoiding unjustified new relations~\cite{provabs}. Thus admissible records need not preserve complete selected answers.
+
+The reviewed works also provide substantial, but differently targeted, comparison machinery. OPM defines structural equality, persistent cross-graph names, profiles, and refinement over inferred multistep dependencies~\cite{opm}. PROV-CONSTRAINTS goes further: it defines validity and equivalence of PROV instances through normalization and isomorphism of valid normal forms~\cite{prov-constraints}. CPF proposes source identifiers, naming dictionaries, and Schematron enforcement for its additional constraints~\cite{cpf}; mediation supplies one query interface over source wrappers~\cite{mediator}; P-PIF proves correctness and completeness of its prospective Prov2ONE translation and provides a shared ProvONE query representation~\cite{ppif}; and Workflow Run RO-Crate reports comparison across heterogeneous systems~\cite{wfrun}. These mechanisms check structural equality, full-model equivalence, translation, declared requirements, or common query access. They do not state the same bounded obligation as complete preservation and reflection of the four selected answers across two native records.
+
+Nor do they remove the external alignment problem. PROV equivalence assumes that applications have already determined URI co-reference~\cite{prov-constraints}. CPF supplies source identifiers and naming dictionaries, while the mediator requires wrapper authors to decide how native fields, data items, and identifiers populate the global schema~\cite{mediator,cpf}. These are necessary host- or domain-dependent premises. A shared relationship contract cannot establish that two native identities really denote corresponding occurrences.
+
+The reviewed set revealed two main obligations for representing and comparing Producer--Consumer relationships. First, a formal contract for preserving and representing the recorded relationships. Second, a formal method for comparison of these relationships under user-supplied identity maps.
+This does not imply that prior models cannot encode the facts or that their broader mechanisms are deficient; a suitably configured validator could enforce the same bounded conditions. The next section defines TIDE as one precise contract for this obligation.
+
+\section{TIDE Exact-Relationship Contract}
+\subsection{Candidate Structure and Identities}
+A candidate TIDE structure is
+\begin{equation}
+K=(I,O),\qquad I,O\subseteq\mathcal{E}\times\mathcal{S},
+\end{equation}
+where $\mathcal{E}$ and $\mathcal{S}$ supply possible Execution and State identities. A realised \emph{Execution} is one identified occurrence of work, computational or otherwise, not a reusable job or operation type. A represented \emph{State} is one identified data or condition occurrence selected as an input or output; State identity is not value equality. Execution and State identifiers are opaque occurrence identities supplied by the host: TIDE neither prescribes a naming syntax nor infers semantic identity from identifier form. A pair $(e,s)\in I$ means that $e$ consumed $s$, and $(e,s)\in O$ means that $e$ produced $s$. Membership in $I$ and $O$ directly answers the primitive producer, consumer, input, and output questions derived in Section~III.
+
+The identities present in $K$ are
+\begin{align}
+E_K&=\{e\mid \exists s:(e,s)\in I\cup O\},\\
+S_K&=\{s\mid \exists e:(e,s)\in I\cup O\}.
+\end{align}
+
+\subsection{Fixed Relationship Judgments}
+The notation $K\vdash J$ means that judgment $J$ follows from $K$.
+
+\emph{Direct handoff.}
+\begin{equation}
+\frac{(e_p,s)\in O\qquad(e_c,s)\in I}
+     {K\vdash\direct{e_p}{s}{e_c}}.
+\end{equation}
+
+\emph{Directed reachability.}
+\begin{equation}
+\frac{n\geq1,\ e_0=e_a,\ e_n=e_b,\ \forall i<n:\ K\vdash\direct{e_i}{s_i}{e_{i+1}}}
+     {K\vdash e_a\reach e_b}.
+\end{equation}
+These judgments are defined for any fixed $K$. Direct handoff relates two Executions through their exact shared State. For example, if $e_0$ produced $s_0$ and $e_1$ consumed $s_0$, then $s_0$ directly connects $e_0$ to $e_1$. Reachability is the non-empty transitive closure of direct handoff. If $e_1$ then produced $s_1$ consumed by $e_2$, the rules additionally derive that $e_0$ reaches $e_2$. Both judgments are composed completely from $I$ and $O$. They identify structurally upstream and downstream Executions without asserting timing, physical transfer, value-level causal necessity, or capture completeness.
+
+\subsection{Validity and Ancestry Meaning}
+A valid $K$ satisfies two semantic conditions. \newline \emph{Unique creation.} Every represented State has exactly one represented producer:
+\begin{equation}
+\forall s\in S_K,\;\exists!e\in E_K:(e,s)\in O.
+\end{equation}
+\emph{Acyclic ancestry.} No Execution reaches itself:
+\begin{equation}
+\forall e\in E_K,\qquad K\nvdash e\reach e.
+\end{equation}
+These rules reject producerless or multiply produced State occurrences and cyclic handoff structure. Valid records therefore have one represented producer per State and permit reachability to carry TIDE's intended acyclic-ancestry meaning.
+
+Validity remains separate from determination and conformance. Fixed $I$ and $O$ still determine answers when a candidate is invalid, and the comparison below can still determine whether mapped incidence corresponds. Only a valid structure, however, carries TIDE's intended unique-production and acyclic-ancestry meaning.
+
+\subsection{Supplied Interpretation and Mapped-Scope Conformance}
+A native record is not itself a TIDE structure. A supplied host interpretation selects native evidence and projects it as realised input and output facts; all other fields and domain meanings remain native. The paper assumes that each supplied interpretation correctly handles its selected evidence. TIDE neither discovers this interpretation nor proves the native record true or complete. It begins after two structures and their occurrence correspondence have been supplied; every exactness claim is relative to the incidence in those projections.
+
+Let $K_1=(I_1,O_1)$ and $K_2=(I_2,O_2)$. Two supplied bijections represent the identities declared to correspond in the ambient identity spaces:
+\begin{equation}
+\begin{aligned}
+f_E&:D_E\overset{\sim}{\longrightarrow}R_E,
+&D_E,R_E&\subseteq\mathcal{E},\\
+f_S&:D_S\overset{\sim}{\longrightarrow}R_S,
+&D_S,R_S&\subseteq\mathcal{S}.
+\end{aligned}
+\label{eq:supplied-identity-maps}
+\end{equation}
+The maps are not required to associate every identity in either carrier, and their endpoints need not occur in either carrier. Empty maps make no relationship claim about either non-empty carrier. Intersecting the supplied domains and ranges with the record carriers defines the mapped identities present on each side:
+\begin{align}
+E_1^m&=E_1\cap D_E, & E_2^m&=E_2\cap R_E,\\
+S_1^m&=S_1\cap D_S, & S_2^m&=S_2\cap R_S.
+\end{align}
+
+Intersection isolates the mapped identities present within a specified representation:
+\begin{align}
+I_i^m&=I_i\cap(E_i^m\times S_i^m),\\
+O_i^m&=O_i\cap(E_i^m\times S_i^m),\qquad i\in\{1,2\}.
+\end{align}
+Set difference exposes the facts outside the mapped scope:
+\begin{align}
+I_i^{\mathrm{out}}&=I_i\setminus I_i^m
+=I_i\setminus(E_i^m\times S_i^m),\\
+O_i^{\mathrm{out}}&=O_i\setminus O_i^m
+=O_i\setminus(E_i^m\times S_i^m).
+\end{align}
+Thus an outside fact has an unmapped Execution, an unmapped State, or both. It remains visible, but cannot be compared under maps that supply no correspondence for at least one endpoint.
+
+The pair map
+\begin{equation}
+F:D_E\times D_S\overset{\sim}{\longrightarrow}R_E\times R_S,
+\qquad
+F(e,s)=(f_E(e),f_S(s))
+\end{equation}
+associates pairs over the first supplied identity sets with pairs over the second and extends elementwise to sets. The structures conform inside a supplied map exactly when
+\begin{equation}
+F(I_1^m)=I_2^m,
+\qquad
+F(O_1^m)=O_2^m.
+\label{eq:scoped-conformance}
+\end{equation}
+Two equality directions have distinct meanings. Preservation failures are facts required by the first scope but missing from the second; reflection failures are facts present in the second scope but unsupported by the first:
+\begin{align}
+\Delta_I^-&=F(I_1^m)\setminus I_2^m,
+&\Delta_I^+&=I_2^m\setminus F(I_1^m),\\
+\Delta_O^-&=F(O_1^m)\setminus O_2^m,
+&\Delta_O^+&=O_2^m\setminus F(O_1^m).
+\end{align}
+Conformance holds exactly when all four difference sets are empty. The outside relations are reported separately and do not alter that result.
+
+\begin{figure}[H]
+\centering
+\footnotesize
+\fbox{\begin{minipage}{0.93\columnwidth}
+\centering
+native records\\
+$\downarrow$ \emph{supplied native interpretations}\\
+$K_1=(I_1,O_1),\;K_2=(I_2,O_2)$\\
+$\downarrow$ \emph{supplied one-to-one occurrence maps}\\
+mapped incidence: compare preservation and reflection\\
+outside incidence: report without comparison\\
+$\downarrow$ \emph{apply fixed rules inside the mapped scope}\\
+Primitive incidence, State-labelled handoffs, and directed reachability
+\par\vspace{0.35ex}
+\raggedright Assumed: identity maps are supplied. \newline Checked: relationship equality and explicit inside/outside differences.
+\end{minipage}}
+\caption{Interpretation and mapped-comparison boundary.}
+\label{fig:boundary}
+\end{figure}
+
+The supplied maps alone define the comparison scope; neither structure has a privileged role beyond the direction in which facts are renamed. The same rule gives whole-kernel equality when (\ref{eq:scoped-conformance}) holds and the supplied identity sets cover both record carriers:
+\begin{equation}
+E_1\subseteq D_E,\quad E_2\subseteq R_E,\quad
+S_1\subseteq D_S,\quad S_2\subseteq R_S.
+\end{equation}
+All four outside relations are then empty, and the conformant mapped substructures are the complete structures. Extra supplied identity pairs absent from the records do not prevent complete coverage.
+
+Either structure may contain facts outside the declared map scope and still be conformant.
+Conformance is independent of validity. Either structure may satisfy or violate the conditions in Section~V-C without changing whether its mapped incidence is preserved and reflected.  Validity is therefore reported as a separate assertion; when required, it preserves TIDE's unique-production and ancestry meaning rather than redefining conformance.
+
+\section{Formal Guarantees}
+The contract now has to establish three claims: fixed incidence determines the selected answers; erasing any retained identity or direction distinction can change those answers; and mapped conformance preserves corresponding answers.
+
+\subsection{Determination}
+\begin{proposition}[Determination]\label{prop:determination}
+For any fixed $K=(I,O)$, the relations $I$ and $O$ determine every primitive production/consumption answer and the complete direct-handoff and directed-reachability answer sets.
+\end{proposition}
+\noindent\emph{Proof.}
+Primitive answers are membership queries in $I$ or $O$. For every $e_p,e_c\in E_K$ and $s\in S_K$,
+\[
+K\vdash\direct{e_p}{s}{e_c}
+\Longleftrightarrow (e_p,s)\in O\land(e_c,s)\in I.
+\]
+Thus $I,O$ fix every local answer, including absence. Finite non-empty chains of those handoffs fix reachability.  \hfill$\square$
+Validity separately constrains ancestry meaning.
+
+\subsection{Bounded Information-Loss Witnesses}
+Each witness uses two valid histories with different answers that become identical after one specified erasure.
+
+\reviewitem{Execution identity}
+Let $O=\{(n_1,s_1),(n_2,s_2)\}$. In $K_1$, let $I_1=\{(v_1,s_1),(v_2,s_2)\}$; in $K_2$, let $I_2=\{(v_2,s_1),(v_1,s_2)\}$. Then $K_1\vdash\direct{n_1}{s_1}{v_1}$ while $K_2\vdash\direct{n_1}{s_1}{v_2}$. Replacing $n_1,n_2$ by $n$ and $v_1,v_2$ by $v$ makes both observations identical.
+
+\reviewitem{State identity}
+Let $O=\{(p_A,s_A),(p_B,s_B)\}$. In $K_1$, $I_1=\{(c,s_A)\}$; in $K_2$, $I_2=\{(c,s_B)\}$. Their handoff answers differ. Replacing $s_A,s_B$ by $s$ makes the observations identical and gives the merged State two producers, violating validity.
+
+\reviewitem{Production/consumption direction}
+Let $O_1=\{(e_0,s)\},I_1=\{(e_1,s)\}$ and $O_2=\{(e_1,s)\},I_2=\{(e_0,s)\}$. The handoffs have opposite directions. Replacing ordered $(I,O)$ with undirected $I\cup O$ makes the observations identical.
+
+\begin{proposition}[Specified erasures do not preserve answers]\label{prop:erasures}
+None of the three displayed erasures preserves the complete direct-handoff and directed-reachability answer sets for all valid structures.
+\end{proposition}
+\noindent\emph{Proof.}
+The paired histories are counterexamples for their respective erasures. The result is limited to these erasures and judgments; it does not establish global minimality, uniqueness, or storage minimality. \hfill$\square$
+
+The witnesses explain why the contract retains three distinctions at once: realised Execution identity, represented State identity, and production versus consumption direction. Removing any one can make different exact relationship answers appear identical.
+
+\subsection{Mapped-Scope Conformance}
+The final guarantee connects the comparison rule to the answers a comparator receives.
+Let $K_i^m=(I_i^m,O_i^m)$ be the substructure induced by the mapped carriers defined in Section~V-D.
+
+\begin{proposition}[Mapped conformance preserves and reflects scoped answers]\label{prop:conformance}
+If $K_1$ and $K_2$ satisfy (\ref{eq:scoped-conformance}), then for every $e_p,e_c,e_a,e_b\in E_1^m$ and $s\in S_1^m$,
+\begin{align}
+K_1^m\vdash\direct{e_p}{s}{e_c}
+&\Longleftrightarrow
+K_2^m\vdash\direct{f_E(e_p)}{f_S(s)}{f_E(e_c)},\\
+K_1^m\vdash e_a\reach e_b
+&\Longleftrightarrow
+K_2^m\vdash f_E(e_a)\reach f_E(e_b).
+\end{align}
+\end{proposition}
+\noindent\emph{Proof.}
+The mapped input/output equalities preserve and reflect every primitive fact after association. A direct handoff is exactly one mapped output fact joined to one mapped input fact on the same State, so the first equivalence follows. Mapping every identity in a finite handoff chain gives a chain in the second mapped substructure; the inverse bijections give the reverse implication and therefore the reachability equivalence. \hfill$\square$
+
+The result concerns answers derived inside the mapped substructures. Outside facts may add other handoffs or paths to either complete structure, but are not compared without a supplied mapping. Validity is not used by the proof and remains a separate assertion.
+
+
+\begin{table*}[!t]
+\caption{Evaluation cases and results. The first row compares retained records from two executions of the same six-operation workload. The remaining rows begin with one controlled pair of six-Execution, seven-State fixtures having the same relationship topology; each case varies only the supplied map, one relation fact, or one added mapped relation and its required identity pair, and performs no additional execution. All rows use the same comparator. $\Delta I$ and $\Delta O$ report missing or unsupported mapped facts; ``outside'' reports facts not covered by the maps.}
+\label{tab:evaluation}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.1pt}
+\begin{tabularx}{\textwidth}{@{}p{0.22\textwidth}ccccc@{\hspace{0.8em}}cY@{}}
+\toprule
+Comparison & Valid $K_1/K_2$ & $\Delta I$ $-/+$ & $\Delta O$ $-/+$ & Outside $I/O$ $K_1;K_2$ & Conforms & Whole equal & Enabled decision\\
+\midrule
+Dagster/OpenLineage run records & Y/Y & 0/0 & 0/0 & 0/0; 0/0 & Y & Y & complete cross-system agreement\\
+Controlled structures, full carrier coverage & Y/Y & 0/0 & 0/0 & 0/0; 0/0 & Y & Y & matching baseline\\
+Controlled structures, partial carrier coverage & Y/Y & 0/0 & 0/0 & 3/3; 3/3 & Y & N & agreement in supplied scope\\
+Omitted mapped input & Y/Y & 1/0 & 0/0 & 0/0; 0/0 & N & N & missing consumption fact\\
+Added mapped-scope input & Y/Y & 0/1 & 0/0 & 0/0; 0/0 & N & N & unsupported consumption fact\\
+Omitted mapped output & Y/N & 0/0 & 1/0 & 0/0; 0/0 & N & N & missing production; invalid target\\
+Mapped output, target identity absent & Y/Y & 0/0 & 1/0 & 0/0; 0/1 & N & N & absent target identity; expected production missing\\
+Added mapped-scope output & Y/Y & 0/0 & 0/1 & 0/0; 0/0 & N & N & unsupported production; absent source identity\\
+Invalid outside branch & Y/N & 0/0 & 0/0 & 0/0; 1/0 & Y & N & validity separate from scope\\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+\section{Evaluation: What TIDE Allows a Comparator to Determine}
+\subsection{What Was Used and What Was Tested}
+After two native records have been projected and identity mapping supplied, the evaluation asks whether one TIDE consumer can determine: whether mapped producer--consumer facts agree; which exact facts differ; what lies outside the map; whether each structure is valid; and whether the map is one-to-one.
+
+There is one six-operation workload. It is executed twice: once by the Dagster runner and once by the Python/OpenLineage runner. Those two runs produce the one retained native-record pair used for cross-system comparison. The remaining comparisons perform no further execution. They use two fixed TIDE structures with different short identities and vary only the supplied map, one relation fact, or one added relation and its required identity pair, isolating each diagnostic scenario. Table~\ref{tab:evaluation} states every expected result.
+
+\Needspace{9\baselineskip}
+A standard-library Python comparator accepts finite JSON-compatible $K=(I,O)$ structures and supplied maps~\cite{artifact}. It checks the structure, derives handoff and reachability, checks validity, and compares mapped incidence. Before comparison, it checks only that both maps are well-formed and one-to-one; mapped identities need not occur in either structure. It then reports absent mapped identities, mapped differences, and outside facts. An existing unmapped identity is outside scope, not an error. Whole-kernel equality additionally requires conformance and carrier coverage on both sides; extra supplied pairs absent from the records do not prevent complete coverage.
+
+\subsection{Comparing Records Produced by the Two Runners}
+\reviewitem{Evidence and test}
+Both runners call the same unchanged six functions retained in \texttt{history.py}. They form one fan-in/fan-out workload: two equal-valued but distinct ready States enter \texttt{merge}, whose output is consumed by both \texttt{analyse} and \texttt{archive}. Dagster~1.13.16 executes them as operations and retains \texttt{STEP\_OUTPUT}/\texttt{LOADED\_INPUT} events. The Python runner executes them again and uses OpenLineage~1.52.0 to retain \texttt{COMPLETE} RunEvents. Each native record is projected to $I,O$, and the supplied maps cover both projections. The test asks whether every exact input/output fact is preserved and reflected.
+
+\reviewitem{Result}
+Each projection contains six Executions, seven States, six input facts, and seven output facts. Both are valid and derive six State-labelled handoffs and thirteen non-empty reachability answers. Every mapped difference and outside set is empty, so the projections conform and are whole-kernel equal.
+
+\reviewitem{What this shows}
+With interpretation and correspondence supplied, one consumer can compare exact relationship answers from different record forms. TIDE neither infers the maps nor proves either native record complete or true.
+
+\subsection{Separating Scope, Relationship Differences, and Invalidity}
+\reviewitem{Evidence and test}
+This group performs no additional execution. Two fixed TIDE structures represent the same six-Execution, seven-State pattern under different short identity sets. Full carrier coverage establishes the matching baseline; each later case changes only the map, one relation fact, or one added relation and its required identity pair.
+
+\reviewitem{Result}
+A partial-coverage map covers four Executions and four States: three input and four output facts agree inside, while each structure has three input and three output facts outside. It conforms but is not whole equal. Removing a mapped input reports $|\Delta_I^-|=1$; adding one reports $|\Delta_I^+|=1$; and removing a mapped output reports $|\Delta_O^-|=1$ and separately leaves its consumed State producerless. Mapping the source output to an identity absent from the target remains assessable, reports the absent target identity and $|\Delta_O^-|=1$, and leaves the target's differently identified output outside scope. Adding a mapped-scope output instead reports an absent source identity and $|\Delta_O^+|=1$ while both structures remain valid. Adding a producerless branch outside the map makes the target invalid while mapped differences remain empty.
+
+\reviewitem{What this shows}
+Unmapped evidence, mapped disagreement, and invalidity are different results: outside facts are not compared, mapped differences name the exact missing or unsupported fact, and validity is judged separately.
+
+\subsection{Reproduction and Overall Finding}
+The artifact retains the comparator, fourteen tests---five comparator unit tests and nine evaluation-table tests---fixed cases, raw native events, projections, maps, expected counts, and audit materials~\cite{artifact}. The runners reproduce the first row of Table~\ref{tab:evaluation}; controlled cases reproduce the rest.
+
+Together, the results show what TIDE adds after projection: one comparator can compare exact mapped relationships, locate disagreement, retain unmatched evidence, and keep conformance, validity, and complete coverage distinct. Proposition~\ref{prop:conformance} guarantees corresponding handoff and reachability answers inside a conforming scope. The evidence establishes evaluation fidelity to this bounded contract, not the truth of supplied interpretation or correspondence.
+
+\section{Discussion and Limitations}
+\textbf{RQ1.} The audit identifies six recurring requirement types: Identity in 32 questions, Producer--Consumer relationship in 25, Annotations and Filtering in 23, Execution Status in 9, Domain Semantics in 9, and Ordering/Time in 6. Producer--Consumer relationship is the common structural requirement selected for this paper.
+
+\textbf{RQ2.} The reviewed approaches can represent its four exact answers, but their admissible records do not uniformly require those answers and their comparison mechanisms target broader or different obligations. Native interpretation and identity co-reference also remain external. The remaining bounded need is therefore a rule that compares exact selected incidence under supplied identity correspondence and exposes what that correspondence does not cover.
+
+\textbf{RQ3.} TIDE supplies that rule. $I$ and $O$ state and determine the exact relationship answers. One-to-one Execution and State maps choose the comparison scope; preservation and reflection compare incidence inside it; set difference reports incidence outside it; and conformance with complete carrier coverage gives whole-kernel equality. Unique production and acyclic ancestry remain separate validity conditions.
+
+\textbf{RQ4.} A single comparator turns those definitions into separate decisions: whether supplied maps are one-to-one, whether mapped facts agree, which exact facts differ, which facts lie outside scope, and whether each structure is valid. The retained native pair demonstrates complete cross-system agreement; the controlled cases demonstrate that partial scope, relationship disagreement, invalidity, and complete coverage are not the same result.
+
+\subsection{Scope and Evidence Boundaries}
+A host-dependent interpretation determines which native records are selected, how they become input/output facts, how Execution and State occurrences are identified, and which occurrences correspond across hosts. The comparator checks map-entry form and one-to-one pairing but treats carrier membership as comparison evidence; it cannot establish semantic co-reference. Incidence and paths outside the mapped scope are reported but not compared. The set-based contract does not represent repeated or port-specific incidence, and its bijections do not express many-to-one granularity alignment. Structural upstream reachability identifies ancestry candidates, not causal necessity; downstream closure identifies potentially affected descendants, not every realised consequence. Domain independence is a property of the contract's types and rules; the present controlled evidence remains workflow-specific and does not establish deployment across multiple domains. The artifact does not measure defect prevalence, discover mappings automatically, measure deployment performance, or show that every host record can be projected into TIDE. TIDE complements rather than replaces richer provenance models; additional answer dimensions require their own semantics and preservation contracts.
+
+\section{Conclusion}
+After audit and review, this paper asks one bounded question: after two execution records have been independently represented, can one comparator determine whether they preserve the same exact producer, consumer, input, and output answers? The question audit finds that relationship requirement in 25 of 35 questions and across all three corpora. The scoped review shows that existing approaches can encode the facts, but their admissible records may omit selected answers and their comparison mechanisms address other obligations.
+
+TIDE supplies the narrower contract needed at that boundary. Exact Execution--State input/output incidence states the answers. Supplied maps choose the shared scope. Preservation and reflection locate missing or unsupported mapped facts, while unmatched facts remain visible outside. A conforming scope gives corresponding handoff and reachability answers; conformance with complete carrier coverage gives whole-kernel equality; and validity remains a separate assertion.
+
+The retained Dagster/OpenLineage pair demonstrates one native cross-system comparison. The controlled cases then isolate partial scope, relationship disagreement, and invalidity without additional executions. Together, the contract and evidence show what TIDE enables: one comparator can compare exact execution relationships and locate where supplied projections stop agreeing. TIDE does not discover native interpretation or identity correspondence, and it does not prove native records complete or true. Future work could assess TIDE’s utility in agentic workflows and business-process modelling, and its scalability on large execution graphs.
+
+\section*{Acknowledgment}
+ChatGPT (OpenAI)~\cite{chatgpt} supported drafting and restructuring
+throughout Sections I--IX, source checking, and artifact analysis.
+The author originated and approved the model, questions, scope,
+evidence, and conclusions, verified the manuscript, and accepts
+responsibility for every claim; ChatGPT is not an author.
+
+\begin{thebibliography}{15}
+\scriptsize
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+
+\bibitem{openlineage-object}
+OpenLineage, ``Object model,'' \emph{OpenLineage Core Specification}, accessed Aug. 6, 2026. [Online]. Available: \url{https://openlineage.io/docs/spec/object-model/}
+
+\bibitem{mlmd-guide}
+TensorFlow, ``ML Metadata,'' accessed Aug. 2, 2026. [Online]. Available: \url{https://www.tensorflow.org/tfx/guide/mlmd}
+
+\bibitem{wfrun}
+S. Leo \emph{et al.}, ``Recording provenance of workflow runs with RO-Crate,''
+\emph{PLOS ONE}, vol. 19, no. 9, e0309210, 2024, doi: 10.1371/journal.pone.0309210.
+
+\bibitem{mediator}
+T. Ellkvist, D. Koop, J. Freire, C. T. Silva, and L. Str\"omb\"ack,
+``Using mediation to achieve provenance interoperability,''
+in \emph{Proc. IEEE Congress on Services-I}, 2009, pp. 291--298, doi: 10.1109/SERVICES-I.2009.68.
+
+\bibitem{ppif}
+A. Prabhune, A. Zweig, R. Stotzka, J. Hesser, and M. Gertz,
+``P-PIF: A ProvONE provenance interoperability framework for analyzing heterogeneous workflow specifications and provenance traces,''
+\emph{Distrib. Parallel Databases}, vol. 36, no. 1, pp. 219--264, 2018, doi: 10.1007/s10619-017-7216-y.
+
+\bibitem{artifact}
+G. Dolbear, ``TIDE exact-relationship conformance and question-audit artifact,'' 2026. [Online]. Available: \url{https://github.com/tnkinobirb/TIDE-Model-Artifact}
+
+\bibitem{second-challenge}
+Provenance Challenge, ``Second Provenance Challenge,'' accessed Aug. 3, 2026. [Online]. Available: \url{https://openprovenance.org/provenance-challenge/SecondProvenanceChallenge.html}
+
+\bibitem{third-challenge-questions}
+Provenance Challenge, ``Provenance Challenge 3 questions,'' accessed Aug. 2, 2026. [Online]. Available: \url{https://openprovenance.org/provenance-challenge/ProvenanceQuestionsPc3.html}
+
+\bibitem{mlmd-tutorial}
+TensorFlow, ``Better ML engineering with ML Metadata,'' accessed Aug. 2, 2026. [Online]. Available: \url{https://www.tensorflow.org/tfx/tutorials/mlmd/mlmd_tutorial}
+
+\bibitem{opm}
+L. Moreau \emph{et al.}, ``The Open Provenance Model core specification (v1.1),''
+\emph{Future Gener. Comput. Syst.}, vol. 27, no. 6, pp. 743--756, 2011, doi: 10.1016/j.future.2010.07.005.
+
+\bibitem{prov-dm}
+L. Moreau and P. Missier, Eds., ``PROV-DM: The PROV data model,''
+W3C Recommendation, Apr. 2013. [Online]. Available: \url{https://www.w3.org/TR/prov-dm/}
+
+\bibitem{prov-constraints}
+J. Cheney, P. Missier, and L. Moreau, ``Constraints of the PROV data model,''
+W3C Recommendation, Apr. 2013. [Online]. Available: \url{https://www.w3.org/TR/prov-constraints/}
+
+\bibitem{cpf}
+U. J. Braun, M. I. Seltzer, A. Chapman, B. Blaustein, M. D. Allen, and L. Seligman,
+``Towards query interoperability: PASSing PLUS,''
+in \emph{Proc. 2nd USENIX Workshop on the Theory and Practice of Provenance (TaPP)}, 2010. [Online]. Available: \url{https://www.usenix.org/conference/tapp-10/towards-query-interoperability-passing-plus}
+
+\bibitem{wfrun-profile}
+Workflow Run RO-Crate Working Group, ``Process Run Crate, version 0.5,'' accessed Aug. 5, 2026. [Online]. Available: \url{https://w3id.org/ro/wfrun/process/0.5}
+
+\bibitem{provabs}
+P. Missier, J. Bryans, C. Gamble, V. Curcin, and R. Danger,
+``ProvAbs: Model, policy, and tooling for abstracting PROV graphs,''
+in \emph{Provenance and Annotation of Data and Processes}, 2015, pp. 3--15, doi: 10.1007/978-3-319-16462-5\_1.
+
+\bibitem{chatgpt}
+OpenAI, ``ChatGPT,'' accessed Aug. 7, 2026. [Online].
+Available: \url{https://chatgpt.com/}
+
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,9 @@
+Category,Question_Appearances,Atomic_Requirements
+Identity,32,64
+Producer-Consumer relationship,25,39
+Execution Status,9,9
+Ordering/Time,6,6
+Domain Semantics,9,23
+Annotations and Filtering,23,37
+TOTAL QUESTIONS,35,
+TOTAL ATOMIC REQUIREMENTS,,178
