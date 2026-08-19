@@ -1,13 +1,14 @@
-"""Regression tests for every evaluation row in Table III of the TIDE paper.
+"""Regression tests for every evaluation row in Table V of the TIDE paper.
 
 The retained-record test executes ``tide-retained-history/compare.py``.
 The controlled tests call the paper's single public comparator operation.
-Every assertion corresponds to a result column displayed in Table III; this
+Every assertion corresponds to a result column displayed in Table V; this
 file introduces no additional comparison rule.
 """
 
-# Table III is reproduced with the standard-library unittest framework.
+# Table V is reproduced with the standard-library unittest framework.
 import contextlib
+import csv
 import io
 import json
 import runpy
@@ -16,18 +17,20 @@ from pathlib import Path
 
 from tide_reference_comparator.comparator import compare
 
-# Section VII-D retains the native records and controlled fixtures together.
+# Retained native records and controlled fixtures are stored together.
 ROOT = Path(__file__).resolve().parent
 RETAINED = ROOT / "tide-retained-history"
 EXAMPLES = ROOT / "tide_reference_comparator" / "examples"
+AUDIT = ROOT / "question-audit"
+PAPER = ROOT / "paper" / "TIDE-W26.tex"
 
 def _load_json(path):
-    """Load one retained JSON input used by a Table III comparison."""
+    """Load one retained JSON input used by a Table V comparison."""
     return json.loads(path.read_text(encoding="utf-8"))
 
 
 def _controlled_result(target_name, mapping_name="full_mapping.json"):
-    """Run one controlled Table III fixture through the paper comparator."""
+    """Run one controlled Table V fixture through the paper comparator."""
     mapping = _load_json(EXAMPLES / mapping_name)
     # Comparator console output is reporting only and is suppressed in tests.
     with contextlib.redirect_stdout(io.StringIO()):
@@ -40,7 +43,7 @@ def _controlled_result(target_name, mapping_name="full_mapping.json"):
 
 
 def _retained_result():
-    """Execute the retained-history comparison used by Table III's first row."""
+    """Execute the retained-history comparison used by Table V's first row."""
     # runpy is required because ``tide-retained-history`` is not a Python
     # package name; executing compare.py also preserves its existing import and
     # input boundary exactly as retained in the artifact.
@@ -50,7 +53,7 @@ def _retained_result():
 
 
 class PaperEvaluationTableTests(unittest.TestCase):
-    """Assert the complete machine-checkable result of every Table III row."""
+    """Assert the complete machine-checkable result of every Table V row."""
 
     def assert_table_row(
         self,
@@ -60,14 +63,15 @@ class PaperEvaluationTableTests(unittest.TestCase):
         delta_i,
         delta_o,
         outside,
+        absent,
         conforms,
-        whole_equal,
+        complete_agreement,
     ):
-        """Match one comparator report to the corresponding Table III cells."""
-        # Every Table III case supplies well-formed one-to-one maps.
+        """Match one comparator report to the corresponding Table V cells."""
+        # Every Table V case supplies well-formed one-to-one maps.
         self.assertTrue(result["assessable"])
 
-        # Table III column: Valid K1/K2.
+        # Table V column: Semantic validity K1/K2.
         self.assertEqual(
             (
                 result["validity"]["K1"]["valid"],
@@ -76,7 +80,7 @@ class PaperEvaluationTableTests(unittest.TestCase):
             valid,
         )
 
-        # Table III columns: Delta I -/+ and Delta O -/+.
+        # Table V columns: Delta I -/+ and Delta O -/+.
         self.assertEqual(
             (
                 len(result["deltas"]["I_minus"]),
@@ -92,7 +96,7 @@ class PaperEvaluationTableTests(unittest.TestCase):
             delta_o,
         )
 
-        # Table III column: Outside I/O K1;K2.
+        # Table V column: Outside I/O K1;K2.
         self.assertEqual(
             (
                 (
@@ -107,11 +111,26 @@ class PaperEvaluationTableTests(unittest.TestCase):
             outside,
         )
 
-        # Table III columns: Conforms and Whole equal.
-        self.assertEqual(result["conformant"], conforms)
-        self.assertEqual(result["whole_kernel_equal"], whole_equal)
+        # Table V column: Absent E/S K1;K2.
+        self.assertEqual(
+            (
+                (
+                    len(result["mapped_identities_absent"]["K1"]["Executions"]),
+                    len(result["mapped_identities_absent"]["K1"]["States"]),
+                ),
+                (
+                    len(result["mapped_identities_absent"]["K2"]["Executions"]),
+                    len(result["mapped_identities_absent"]["K2"]["States"]),
+                ),
+            ),
+            absent,
+        )
 
-    # Table III row 1: retained Dagster/OpenLineage run records.
+        # Table V columns: Conforms and Complete agreement.
+        self.assertEqual(result["conformant"], conforms)
+        self.assertEqual(result["complete_agreement"], complete_agreement)
+
+    # Table V row 1: retained Dagster/OpenLineage run records.
     def test_01_dagster_openlineage_run_records(self):
         self.assert_table_row(
             _retained_result(),
@@ -119,35 +138,38 @@ class PaperEvaluationTableTests(unittest.TestCase):
             delta_i=(0, 0),
             delta_o=(0, 0),
             outside=((0, 0), (0, 0)),
+            absent=((0, 0), (0, 0)),
             conforms=True,
-            whole_equal=True,
+            complete_agreement=True,
         )
 
-    # Table III row 2: controlled structures, full carrier coverage.
-    def test_02_controlled_structures_full_carrier_coverage(self):
+    # Table V row 2: controlled structures, full identity coverage.
+    def test_02_controlled_structures_full_identity_coverage(self):
         self.assert_table_row(
             _controlled_result("controlled_1.json"),
             valid=(True, True),
             delta_i=(0, 0),
             delta_o=(0, 0),
             outside=((0, 0), (0, 0)),
+            absent=((0, 0), (0, 0)),
             conforms=True,
-            whole_equal=True,
+            complete_agreement=True,
         )
 
-    # Table III row 3: controlled structures, partial carrier coverage.
-    def test_03_controlled_structures_partial_carrier_coverage(self):
+    # Table V row 3: controlled structures, partial identity coverage.
+    def test_03_controlled_structures_partial_identity_coverage(self):
         self.assert_table_row(
             _controlled_result("controlled_1.json", "selected_mapping.json"),
             valid=(True, True),
             delta_i=(0, 0),
             delta_o=(0, 0),
             outside=((3, 3), (3, 3)),
+            absent=((0, 0), (0, 0)),
             conforms=True,
-            whole_equal=False,
+            complete_agreement=False,
         )
 
-    # Table III row 4: omitted mapped input.
+    # Table V row 4: omitted mapped input.
     def test_04_omitted_mapped_input(self):
         self.assert_table_row(
             _controlled_result("missing_input.json"),
@@ -155,11 +177,12 @@ class PaperEvaluationTableTests(unittest.TestCase):
             delta_i=(1, 0),
             delta_o=(0, 0),
             outside=((0, 0), (0, 0)),
+            absent=((0, 0), (0, 0)),
             conforms=False,
-            whole_equal=False,
+            complete_agreement=False,
         )
 
-    # Table III row 5: added mapped-scope input.
+    # Table V row 5: added mapped-scope input.
     def test_05_added_mapped_scope_input(self):
         self.assert_table_row(
             _controlled_result("extra_scoped_input.json"),
@@ -167,11 +190,12 @@ class PaperEvaluationTableTests(unittest.TestCase):
             delta_i=(0, 1),
             delta_o=(0, 0),
             outside=((0, 0), (0, 0)),
+            absent=((0, 0), (0, 0)),
             conforms=False,
-            whole_equal=False,
+            complete_agreement=False,
         )
 
-    # Table III row 6: omitted mapped output.
+    # Table V row 6: omitted mapped output.
     def test_06_omitted_mapped_output(self):
         self.assert_table_row(
             _controlled_result("missing_output.json"),
@@ -179,11 +203,12 @@ class PaperEvaluationTableTests(unittest.TestCase):
             delta_i=(0, 0),
             delta_o=(1, 0),
             outside=((0, 0), (0, 0)),
+            absent=((0, 0), (0, 0)),
             conforms=False,
-            whole_equal=False,
+            complete_agreement=False,
         )
 
-    # Table III row 7: mapped output whose target identity is absent.
+    # Table V row 7: mapped output whose target identity is absent.
     def test_07_mapped_output_target_identity_absent(self):
         self.assert_table_row(
             _controlled_result(
@@ -194,11 +219,12 @@ class PaperEvaluationTableTests(unittest.TestCase):
             delta_i=(0, 0),
             delta_o=(1, 0),
             outside=((0, 0), (0, 1)),
+            absent=((0, 0), (0, 1)),
             conforms=False,
-            whole_equal=False,
+            complete_agreement=False,
         )
 
-    # Table III row 8: added mapped-scope output.
+    # Table V row 8: added mapped-scope output.
     def test_08_added_mapped_scope_output(self):
         self.assert_table_row(
             _controlled_result(
@@ -209,11 +235,12 @@ class PaperEvaluationTableTests(unittest.TestCase):
             delta_i=(0, 0),
             delta_o=(0, 1),
             outside=((0, 0), (0, 0)),
+            absent=((0, 1), (0, 0)),
             conforms=False,
-            whole_equal=False,
+            complete_agreement=False,
         )
 
-    # Table III row 9: invalid branch outside the supplied map.
+    # Table V row 9: invalid branch outside the supplied map.
     def test_09_invalid_outside_branch(self):
         self.assert_table_row(
             _controlled_result("invalid_outside_branch.json"),
@@ -221,11 +248,43 @@ class PaperEvaluationTableTests(unittest.TestCase):
             delta_i=(0, 0),
             delta_o=(0, 0),
             outside=((0, 0), (1, 0)),
+            absent=((0, 0), (0, 0)),
             conforms=True,
-            whole_equal=False,
+            complete_agreement=False,
         )
 
 
-# Section VII-D permits direct standard-library reproduction from artifact root.
+class PaperAuditWordingTests(unittest.TestCase):
+    """Keep the four normalized audit answers identical to the paper."""
+
+    def test_producer_consumer_answer_wording_matches_paper(self):
+        expected = {
+            "PC1": "Which process occurrence produced a selected data item?",
+            "PC2": "Which process occurrences consumed a selected data item?",
+            "PC3": "Which exact data items did a process occurrence consume?",
+            "PC4": "Which exact data items did a process occurrence produce?",
+        }
+        with (AUDIT / "producer_consumer_normalisation.csv").open(
+            newline="",
+            encoding="utf-8",
+        ) as stream:
+            rows = list(csv.DictReader(stream))
+
+        for form_id, wording in expected.items():
+            observed = {
+                row["Paper_Exact_Answer_Wording"]
+                for row in rows
+                if row["Form_ID"] == form_id
+            }
+            self.assertEqual(observed, {wording})
+
+        paper = PAPER.read_text(encoding="utf-8")
+        audit_readme = (AUDIT / "README.md").read_text(encoding="utf-8")
+        for wording in expected.values():
+            self.assertIn(wording, paper)
+            self.assertIn(wording, audit_readme)
+
+
+# Support direct standard-library reproduction from the artifact root.
 if __name__ == "__main__":
     unittest.main(verbosity=2)

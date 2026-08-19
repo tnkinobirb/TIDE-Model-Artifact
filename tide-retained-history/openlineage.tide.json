@@ -1,4 +1,21 @@
 {
+  "E": [
+    "openlineage:run:10000000-0000-4000-8000-000000000001",
+    "openlineage:run:10000000-0000-4000-8000-000000000002",
+    "openlineage:run:10000000-0000-4000-8000-000000000003",
+    "openlineage:run:10000000-0000-4000-8000-000000000004",
+    "openlineage:run:10000000-0000-4000-8000-000000000005",
+    "openlineage:run:10000000-0000-4000-8000-000000000006"
+  ],
+  "S": [
+    "openlineage:dataset:tide-retained-history/analysis",
+    "openlineage:dataset:tide-retained-history/archive_record",
+    "openlineage:dataset:tide-retained-history/merged",
+    "openlineage:dataset:tide-retained-history/ready_left",
+    "openlineage:dataset:tide-retained-history/ready_right",
+    "openlineage:dataset:tide-retained-history/source_left",
+    "openlineage:dataset:tide-retained-history/source_right"
+  ],
   "I": [
     [
       "openlineage:run:10000000-0000-4000-8000-000000000002",

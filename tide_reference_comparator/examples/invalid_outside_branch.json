@@ -1,4 +1,10 @@
 {
+  "E": [
+    "mx0", "mx1", "mx2", "mx3", "mx4", "mx5", "outside_execution"
+  ],
+  "S": [
+    "ma0", "ma1", "ma2", "ma3", "ma4", "ma5", "ma6", "outside_state"
+  ],
   "I": [
     ["mx1", "ma0"],
     ["mx2", "ma1"],
