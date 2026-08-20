@@ -88,17 +88,31 @@ def execution(event):
 def state(dataset):
     return f"openlineage:dataset:{dataset.namespace}/{dataset.name}"
 
-# TIDE structure
-model = {"I": [], "O": []}
+# TIDE structure from Eq. (1). Run and Dataset carriers are selected before
+# input/output incidence so their represented identity is not derived from it.
+executions = set()
+states = set()
+inputs = set()
+outputs = set()
 
 for event in records.events:
-    # project (e, s) input and output occurrences
-    model["I"].extend([execution(event), state(item)] for item in event.inputs)
-    model["O"].extend([execution(event), state(item)] for item in event.outputs)
+    exec_id = execution(event)
+    executions.add(exec_id)
+    for item in event.inputs:
+        state_id = state(item)
+        states.add(state_id)
+        inputs.add((exec_id, state_id))
+    for item in event.outputs:
+        state_id = state(item)
+        states.add(state_id)
+        outputs.add((exec_id, state_id))
 
-# sort the lists
-for relation in model.values():
-    relation.sort()
+model = {
+    "E": sorted(executions),
+    "S": sorted(states),
+    "I": [list(pair) for pair in sorted(inputs)],
+    "O": [list(pair) for pair in sorted(outputs)],
+}
 
 # export the TIDE model as json
 (HERE / "openlineage.tide.json").write_text(

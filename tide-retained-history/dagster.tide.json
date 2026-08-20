@@ -1,4 +1,21 @@
 {
+  "E": [
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:analyse",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:archive",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:capture_sources",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:merge",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:prepare_left",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:prepare_right"
+  ],
+  "S": [
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:analyse:output:result",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:archive:output:result",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:capture_sources:output:source_left",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:capture_sources:output:source_right",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:merge:output:result",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:prepare_left:output:result",
+    "dagster:run:00000000-0000-4000-8000-000000000001:step:prepare_right:output:result"
+  ],
   "I": [
     [
       "dagster:run:00000000-0000-4000-8000-000000000001:step:analyse",

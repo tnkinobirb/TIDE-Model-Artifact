@@ -4,7 +4,7 @@
 
 `controlled_0.json`, `controlled_1.json`, and `full_mapping.json` are the
 controlled six-Execution, seven-State structures used for the non-native rows
-of Table III. They retain:
+of Table V. They retain:
 
 - 6 Executions;
 - 7 States;
@@ -14,24 +14,22 @@ of Table III. They retain:
 - 13 non-empty reachability answers.
 
 The two files use different opaque identity strings and the same relationship
-topology. They are relation fixtures, not additional host executions. The
-paper's two retained native runs and their projections remain in the wider
-artifact; the comparator begins only after projection.
+topology. They are explicit-carrier structures, not additional host
+executions. The paper's two retained native runs and their projections remain
+in the wider artifact; the comparator begins only after projection.
 
-## Table III controlled cases
+## Table V controlled cases
 
-- `full_mapping.json` gives complete carrier coverage.
-- `selected_mapping.json` gives partial carrier coverage over both complete
+- `full_mapping.json` gives complete identity coverage.
+- `selected_mapping.json` gives partial identity coverage over both complete
   structures.
-- `selected_source.json` gives the smaller-source special case under the same
-  mapped-scope rule.
 - `missing_input.json` omits one mapped input (`Delta I minus`).
 - `extra_scoped_input.json` adds one mapped input (`Delta I plus`).
 - `missing_output.json` omits one mapped output (`Delta O minus`) and
   leaves its consumed State producerless.
-- `mapped_output_target_absent.json` supplies an output-State endpoint absent
-  from the target record; the map remains assessable and the expected output
-  is missing.
+- `mapped_output_target_absent.json` maps an output State identity to an
+  identity absent from the target `S`; the map remains assessable and the
+  expected output is missing.
 - `extra_scoped_output.json` plus
   `full_mapping_with_extra_target_state.json` adds one mapped output (`Delta O
   plus`) while both structures remain valid.
@@ -39,9 +37,13 @@ artifact; the comparator begins only after projection.
   complete fixture map, leaving conformance unchanged while target validity
   fails.
 
-Every mutation changes only the supplied map, one incidence fact, or the one
-added mapped fact and its required identity pair, exactly as stated in Table
-III. None is claimed to be an observed host defect.
+Every mutation changes only the supplied map, an explicit carrier, or one
+incidence fact, exactly as stated in Table V. None is claimed to be an
+observed host defect.
+
+`selected_source.json` is an additional exact-coverage boundary fixture used
+by the comparator unit suite with `selected_mapping.json`; it is not a row of
+Table V.
 
 ## Boundary
 

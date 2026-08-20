@@ -84,27 +84,43 @@ def execution(step):
 def state(step, output):
     return f"dagster:run:{RUN_ID}:step:{step}:output:{output}"
 
-# TIDE Structure - lists may contain duplicates, but are treated as one occurrence. 
-model = {"I": [], "O": []}
+# TIDE structure from Eq. (1). Carriers are collected independently of
+# incidence so an executed step remains represented even with no inputs or
+# outputs, and a selected State remains represented independently of its edges.
+executions = set()
+states = set()
+inputs = set()
+outputs = set()
 
-# dor all dagster events
+# for all Dagster events
 for event in result.all_events:
+    # Select each recorded step occurrence as an Execution identity.
+    if event.step_key is not None:
+        executions.add(execution(event.step_key))
+
     # project (e, s) output occurrences.
     if event.event_type_value == "STEP_OUTPUT":
         output_name = event.event_specific_data.output_name
-        model["O"].append([execution(event.step_key), state(event.step_key, output_name)])
+        output_state = state(event.step_key, output_name)
+        states.add(output_state)
+        outputs.add((execution(event.step_key), output_state))
 
     #  project (e, s) input occurrences.
     if event.event_type_value == "LOADED_INPUT":
         loaded = event.event_specific_data
-        model["I"].append([
-            execution(event.step_key),
-            state(loaded.upstream_step_key, loaded.upstream_output_name),
-        ])
+        input_state = state(
+            loaded.upstream_step_key,
+            loaded.upstream_output_name,
+        )
+        states.add(input_state)
+        inputs.add((execution(event.step_key), input_state))
 
-# sort occurrences
-for relation in model.values():
-    relation.sort()
+model = {
+    "E": sorted(executions),
+    "S": sorted(states),
+    "I": [list(pair) for pair in sorted(inputs)],
+    "O": [list(pair) for pair in sorted(outputs)],
+}
 
 # export the TIDE model as json
 (HERE / "dagster.tide.json").write_text(

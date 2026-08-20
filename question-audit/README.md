@@ -156,6 +156,15 @@ Following this result, additional literature was reviewed to identify whether th
 
 The different Producer-Consumer phrasings reduce to four directional questions: which Execution produced or consumed a selected State, and which States a selected Execution consumed or produced. The normalisation does not merge away the source-specific atomic requirement; it keeps that requirement and its stable ID visible, then records which of the four answer forms it supports. This is why one “produced or used” requirement may link to two forms while remaining one classified atomic occurrence.
 
+| Form | TIDE restatement | Exact answer wording used in the paper |
+|---|---|---|
+| PC1 | Which Execution produced a selected State? | Which process occurrence produced a selected data item? |
+| PC2 | Which Executions consumed a selected State? | Which process occurrences consumed a selected data item? |
+| PC3 | Which exact States did a selected Execution consume? | Which exact data items did a process occurrence consume? |
+| PC4 | Which exact States did a selected Execution produce? | Which exact data items did a process occurrence produce? |
+
+The complete requirement-to-form crosswalk is retained in `producer_consumer_normalisation.csv`. Its `Canonical_Atomic_Requirement` column preserves qualifications from the source decomposition, including “where a producer is represented in the selected history,” while `Paper_Exact_Answer_Wording` uses the four shared questions above.
+
 # Files
 
 - `source_selection.csv` — declared source boundary and every retained or excluded source item.
