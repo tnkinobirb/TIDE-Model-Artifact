@@ -13,4 +13,4 @@ pdflatex -interaction=nonstopmode -halt-on-error TIDE-Paper.tex
 ```
 
 The second pass resolves cross-references. The retained output is US Letter
-and remains within the workshop's eight-page maximum.
+and remains within eight pages.
