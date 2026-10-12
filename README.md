@@ -5,9 +5,9 @@ This repo contains a research paper and it's supporting artifact. The research p
 Contained within are:
 
 - `paper/` — contains the PDF and `.tex` source.
-- `question-audit` — contains the question audit used to identify and count recurring requirements.
-- `tide-retained-history` — contains the retained Dagster and OpenLineage histories and their comparison.
-- `tide_reference_comparator` — contains the TIDE reference comparator and its unit tests.
+- `question-audit/` — contains the question audit used to identify and count recurring requirements.
+- `tide-retained-history/` — contains the retained Dagster and OpenLineage histories and their comparison.
+- `tide_reference_comparator/` — contains the TIDE reference comparator and its unit tests.
 - `test_examples.py` — tests and runs the comparisons outlined in Section VII.
 
 All tests can be run with:
